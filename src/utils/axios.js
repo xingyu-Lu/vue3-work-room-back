@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
 import router from '@/router/index.js'
-import { localGet } from './index.js'
+import { sessionGet } from './index.js'
 import config from '~/config'
 
 
@@ -11,7 +11,7 @@ axios.defaults.baseURL = config[import.meta.env.MODE].baseUrl
 axios.defaults.withCredentials = true
 // 请求头，headers 信息
 axios.defaults.headers['X-Requested-With'] = 'XMLHttpRequest'
-axios.defaults.headers['token'] = localGet('token') || ''
+axios.defaults.headers['token'] = sessionGet('token') || ''
 // 默认 post 请求，使用 application/json 形式
 axios.defaults.headers.post['Content-Type'] = 'application/json'
 

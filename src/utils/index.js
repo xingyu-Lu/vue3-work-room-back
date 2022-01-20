@@ -1,18 +1,18 @@
-export function localGet(key) {
-	const value = window.localStorage.getItem(key)
+export function sessionGet(key) {
+	const value = window.sessionStorage.getItem(key)
 	try {
-		return JSON.parse(window.localStorage.getItem(key))
+		return JSON.parse(window.sessionStorage.getItem(key))
 	} catch (error) {
 		return value
 	}
 }
 
-export function localSet(key, value) {
-	window.localStorage.setItem(key, JSON.stringify(value))
+export function sessionSet(key, value) {
+	window.sessionStorage.setItem(key, JSON.stringify(value))
 }
 
-export function localRemove(key) {
-	window.localStorage.removeItem(key)
+export function sessionRemove(key) {
+	window.sessionStorage.removeItem(key)
 }
 
 // 判断内容是否含有表情字符，现有数据库不支持。
@@ -30,7 +30,7 @@ export const uploadImgsServer = 'http://backend-api-02.newbee.ltd/manage-api/v1/
 export const pathMap = {
 	login: '登录',
 	register: '注册',
-	introduce: '宜宾市第三人民医院',
+	introduce: '系统介绍',
 	// 医院概况
 	yyjj: '医院简介',
 	ldtd: '领导团队',
