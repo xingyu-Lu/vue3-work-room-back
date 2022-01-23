@@ -27,6 +27,7 @@ import axios from '@/utils/axios'
 import md5 from 'js-md5'
 import { reactive, ref, toRefs } from 'vue'
 import { sessionSet } from '@/utils'
+import { ElMessage } from 'element-plus'
 export default {
   name: 'Login',
   setup() {
@@ -49,11 +50,11 @@ export default {
     const submitForm = async () => {
       loginForm.value.validate((valid) => {
         if (valid) {
-          axios.post('/adminUser/login', {
-            userName: state.ruleForm.username || '',
-            passwordMd5: md5(state.ruleForm.password)
+          axios.post('/api/back/authorizations', {
+            name: state.ruleForm.username || '',
+            password: state.ruleForm.password
           }).then(res => {
-            sessionSet('token', res)
+            sessionSet('token', res.token)
             window.location.href = '/'
           })
         } else {

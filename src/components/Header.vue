@@ -14,13 +14,12 @@
         <template #reference>
           <div class="author">
             <i class="icon el-icon-s-custom" />
-            {{ userInfo && userInfo.nickName || '' }}
+            {{ userInfo && userInfo.name || '' }}
             <i class="el-icon-caret-bottom" />
           </div>
         </template>
         <div class="nickname">
-          <p>登录名：{{ userInfo && userInfo.loginUserName || '' }}</p>
-          <p>昵称：{{ userInfo && userInfo.nickName || '' }}</p>
+          <p>登录名：{{ userInfo && userInfo.name || '' }}</p>
           <el-tag size="small" effect="dark" class="logout" @click="logout">退出</el-tag>
         </div>
       </el-popover>
@@ -32,7 +31,7 @@
 import { onMounted, reactive, toRefs } from 'vue'
 import { useRouter } from 'vue-router'
 import axios from '@/utils/axios'
-import { sessionRemove, pathMap } from '@/utils'
+import { sessionRemove, sessionSet, sessionGet, pathMap } from '@/utils'
 export default {
   name: 'Header',
   setup() {
@@ -45,11 +44,17 @@ export default {
     onMounted(() => {
       const pathname = window.location.hash.split('/')[1] || ''
       if (!['login'].includes(pathname)) {
-        getUserInfo()
+		const userinfo = sessionGet('userinfo')
+		if (userinfo) {
+			state.userInfo = userinfo
+		} else {
+			getUserInfo()
+		}
       }
     })
     const getUserInfo = async () => {
-      const userInfo = await axios.get('/adminUser/profile')
+      const userInfo = await axios.get('/api/back/admins/info')
+	  sessionSet('userinfo', userInfo);
       state.userInfo = userInfo
     }
     const logout = () => {
