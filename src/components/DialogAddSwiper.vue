@@ -40,7 +40,7 @@
 <script>
 import { reactive, ref, toRefs } from 'vue'
 import axios from '@/utils/axios'
-import { localGet, uploadImgServer, hasEmoji } from '@/utils'
+import { sessionGet, uploadImgServer, hasEmoji } from '@/utils'
 import { ElMessage } from 'element-plus'
 
 export default {
@@ -53,7 +53,7 @@ export default {
     const formRef = ref(null)
     const state = reactive({
       uploadImgServer,
-      token: localGet('token') || '',
+      token: sessionGet('token') || '',
       visible: false,
       ruleForm: {
         url: '',

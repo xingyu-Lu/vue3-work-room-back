@@ -62,7 +62,7 @@ import WangEditor from 'wangeditor'
 import axios from '@/utils/axios'
 import { ElMessage } from 'element-plus'
 import { useRoute, useRouter } from 'vue-router'
-import { localGet, uploadImgServer, uploadImgsServer, hasEmoji } from '@/utils'
+import { sessionGet, uploadImgServer, uploadImgsServer, hasEmoji } from '@/utils'
 export default {
   name: 'AddGood',
   setup() {
