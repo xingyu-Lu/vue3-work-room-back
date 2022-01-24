@@ -7,11 +7,36 @@ const router = createRouter({
       path: '/',
       redirect: '/introduce'
     },
+	// dashboard
     {
       path: '/introduce',
       name: 'introduce',
       component: () => import(/* webpackChunkName: "introduce" */ '../views/Introduce.vue')
     },
+	// 系统管理
+	{
+		path: '/admin',
+		name: 'admin',
+		component: () => import(/* webpackChunkName: "introduce" */ '../views/admin/index.vue')
+	},
+	{
+		path: '/admin/add',
+		name: 'admin_add',
+		component: () => import(/* webpackChunkName: "introduce" */ '../views/admin/add.vue')
+	},
+	{
+		path: '/menu',
+		name: 'menu',
+		component: () => import(/* webpackChunkName: "introduce" */ '../views/menu/index.vue')
+	},
+	{
+		path: '/menu/add',
+		name: 'menu_add',
+		component: () => import(/* webpackChunkName: "introduce" */ '../views/menu/add.vue')
+	},
+	
+	
+	
     {
       path: '/dashboard',
       name: 'dashboard',

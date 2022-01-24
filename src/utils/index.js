@@ -31,6 +31,14 @@ export const pathMap = {
 	login: '登录',
 	register: '注册',
 	introduce: '系统介绍',
+	
+	// 系统管理
+	admin: '管理员列表',
+	admin_add: '管理员',
+	
+	menu: '菜单列表',
+	menu_add: '菜单',
+	
 	// 医院概况
 	yyjj: '医院简介',
 	ldtd: '领导团队',

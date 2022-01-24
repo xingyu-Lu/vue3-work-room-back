@@ -40,7 +40,7 @@
 							<span>新闻动态</span>
 						</template>
 						<el-menu-item-group>
-							<el-menu-item index="/"><i class="el-icon-menu" />医院新闻</el-menu-item>
+							<el-menu-item index="/">医院新闻</el-menu-item>
 							<el-menu-item index="/"><i class="el-icon-s-goods" />医院公告</el-menu-item>
 						</el-menu-item-group>
 					</el-sub-menu>
@@ -49,7 +49,7 @@
 							<span>科室介绍</span>
 						</template>
 						<el-menu-item-group>
-							<el-menu-item index="/"><i class="el-icon-menu" />科室介绍</el-menu-item>
+							<el-menu-item index="/">科室介绍</el-menu-item>
 						</el-menu-item-group>
 					</el-sub-menu>
 					<el-sub-menu index="5">
@@ -57,7 +57,7 @@
 							<span>专家介绍</span>
 						</template>
 						<el-menu-item-group>
-							<el-menu-item index="/"><i class="el-icon-menu" />专家介绍</el-menu-item>
+							<el-menu-item index="/">专家介绍</el-menu-item>
 							<el-menu-item index="/"><i class="el-icon-s-goods" />出诊信息</el-menu-item>
 						</el-menu-item-group>
 					</el-sub-menu>
@@ -66,7 +66,7 @@
 							<span>科研教学</span>
 						</template>
 						<el-menu-item-group>
-							<el-menu-item index="/"><i class="el-icon-menu" />科研动态</el-menu-item>
+							<el-menu-item index="/">科研动态</el-menu-item>
 						</el-menu-item-group>
 					</el-sub-menu>
 					<el-sub-menu index="7">
@@ -74,7 +74,7 @@
 							<span>患者服务</span>
 						</template>
 						<el-menu-item-group>
-							<el-menu-item index="/"><i class="el-icon-menu" />门诊流程</el-menu-item>
+							<el-menu-item index="/">门诊流程</el-menu-item>
 							<el-menu-item index="/"><i class="el-icon-s-goods" />住院流程</el-menu-item>
 							<el-menu-item index="/"><i class="el-icon-s-goods" />出诊信息</el-menu-item>
 							<el-menu-item index="/"><i class="el-icon-s-goods" />检查须知</el-menu-item>
@@ -92,7 +92,7 @@
 							<span>党建之窗</span>
 						</template>
 						<el-menu-item-group>
-							<el-menu-item index="/"><i class="el-icon-menu" />党务管理</el-menu-item>
+							<el-menu-item index="/">党务管理</el-menu-item>
 							<el-menu-item index="/"><i class="el-icon-s-goods" />党员教育</el-menu-item>
 							<el-menu-item index="/"><i class="el-icon-s-goods" />党风廉政</el-menu-item>
 							<el-menu-item index="/"><i class="el-icon-s-goods" />员工之家</el-menu-item>
@@ -105,7 +105,7 @@
 							<span>党建之窗</span>
 						</template>
 						<el-menu-item-group>
-							<el-menu-item index="/"><i class="el-icon-menu" />党务管理</el-menu-item>
+							<el-menu-item index="/">党务管理</el-menu-item>
 							<el-menu-item index="/"><i class="el-icon-s-goods" />党员教育</el-menu-item>
 							<el-menu-item index="/"><i class="el-icon-s-goods" />党风廉政</el-menu-item>
 							<el-menu-item index="/"><i class="el-icon-s-goods" />员工之家</el-menu-item>
@@ -118,7 +118,7 @@
 							<span>人才招聘</span>
 						</template>
 						<el-menu-item-group>
-							<el-menu-item index="/"><i class="el-icon-menu" />招聘信息</el-menu-item>
+							<el-menu-item index="/">招聘信息</el-menu-item>
 							<el-menu-item index="/"><i class="el-icon-s-goods" />应聘流程</el-menu-item>
 						</el-menu-item-group>
 					</el-sub-menu>
@@ -127,7 +127,7 @@
 							<span>员工之声</span>
 						</template>
 						<el-menu-item-group>
-							<el-menu-item index="/"><i class="el-icon-menu" />员工之声</el-menu-item>
+							<el-menu-item index="/">员工之声</el-menu-item>
 						</el-menu-item-group>
 					</el-sub-menu>
 					<el-sub-menu index="12">
@@ -135,8 +135,14 @@
 							<span>系统管理</span>
 						</template>
 						<el-menu-item-group>
-							<el-menu-item index="/"><i class="el-icon-lock" />首页轮播图</el-menu-item>
-							<!-- <el-menu-item index="/account"><i class="el-icon-lock" />修改密码</el-menu-item> -->
+							<el-menu-item index="/admin">管理员管理</el-menu-item>
+						</el-menu-item-group>
+						<el-menu-item-group>
+							<el-menu-item index="/menu">菜单管理</el-menu-item>
+						</el-menu-item-group>
+						<el-menu-item-group>
+							<el-menu-item index="/">首页轮播图</el-menu-item>
+							<!-- <el-menu-item index="/account">修改密码</el-menu-item> -->
 						</el-menu-item-group>
 					</el-sub-menu>
 				</el-menu>
@@ -179,7 +185,7 @@
 			const noMenu = ['/login']
 			const router = useRouter()
 			const state = reactive({
-				defaultOpen: ['1', '2', '3', '4'],
+				defaultOpen: ['1'],
 				showMenu: true,
 				currentPath: '/dashboard',
 				count: {

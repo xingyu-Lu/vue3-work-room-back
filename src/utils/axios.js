@@ -26,7 +26,7 @@ axios.interceptors.response.use(res => {
 		ElMessage.error('服务端异常！')
 		return Promise.reject(res)
 	}
-	
+
 	if (res.data.status != 200) {
 		console.log(res.response)
 
@@ -36,12 +36,15 @@ axios.interceptors.response.use(res => {
 		// }
 		// return Promise.reject(res.data)
 	}
-	
-	return res.data.data
-	}, function (error) {
-		console.log(error.response);
-		ElMessage.error(error.response.data.error.message)
-		return Promise.reject(error);
-	})
+
+	return res.data
+}, function(error) {
+	console.log(error.response);
+	ElMessage.error(error.response.data.error.message)
+	if (error.response.data.status == 401) {
+		router.push({ path: '/login' })
+	}
+	return Promise.reject(error);
+})
 
 export default axios

@@ -20,6 +20,7 @@
         </template>
         <div class="nickname">
           <p>登录名：{{ userInfo && userInfo.name || '' }}</p>
+		  <p>welcome</p>
           <el-tag size="small" effect="dark" class="logout" @click="logout">退出</el-tag>
         </div>
       </el-popover>
@@ -67,7 +68,6 @@ export default {
       router.back()
     }
     router.afterEach((to) => {
-      console.log('to', to)
       const { id } = to.query
       state.name = pathMap[to.name]
       if (id && to.name == 'add') {

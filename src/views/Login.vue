@@ -54,7 +54,7 @@ export default {
             name: state.ruleForm.username || '',
             password: state.ruleForm.password
           }).then(res => {
-            sessionSet('token', res.token)
+            sessionSet('token', res.data.token)
             window.location.href = '/'
           })
         } else {
