@@ -52,6 +52,12 @@
 		useRouter,
 		useRoute
 	} from 'vue-router'
+	import {
+		sessionGet,
+		uploadImgServer
+	} from '@/utils'
+	
+	console.log(uploadImgServer)
 
 	export default {
 		name: 'rotate_list',

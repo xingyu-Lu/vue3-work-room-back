@@ -68,7 +68,7 @@
 			const noMenu = ['/login']
 			const router = useRouter()
 			const state = reactive({
-				defaultOpen: ['1'],
+				defaultOpen: ['0'],
 				showMenu: true,
 				menuList: [],
 				currentPath: '/dashboard',

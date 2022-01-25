@@ -25,11 +25,10 @@ import config from '~/config'
 
 // 单张图片上传
 // export const uploadImgServer = 'http://backend-api-02.newbee.ltd/manage-api/v1/upload/file'
-export const uploadImgServer = '/api/back/files/upload'
+export const uploadImgServer = config[import.meta.env.MODE].baseUrl + '/api/back/files/upload'
 // 多张图片上传
 // export const uploadImgsServer = 'http://backend-api-02.newbee.ltd/manage-api/v1/upload/files'
-export const uploadImgsServer = config[
-	import.meta.env.MODE].baseUrl + '/api/back/files/upload'
+export const uploadImgsServer = config[import.meta.env.MODE].baseUrl + '/api/back/files/upload'
 
 
 export const pathMap = {

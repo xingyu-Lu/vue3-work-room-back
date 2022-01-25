@@ -23,6 +23,7 @@ export default ({ mode }) => defineConfig({
 	  proxy: {
 		'/apis': {
 		  target: 'http://luxy.three_hospital_api.com/',
+		  // target: 'http://127.0.0.1:8001/',
 		  changeOrigin: true,
 		  rewrite: path => path.replace(/^\/apis/, '')
 		}
