@@ -150,6 +150,13 @@
 						}
 			
 						let url = '/api/back/briefs'
+						
+						if (id) {
+							// params.id = id
+							// 修改商品使用 put 方法
+							httpOption = axios.put
+							url = `/api/back/briefs/${id}`
+						}
 			
 						httpOption(url, params).then(() => {
 							ElMessage.success('添加成功')
