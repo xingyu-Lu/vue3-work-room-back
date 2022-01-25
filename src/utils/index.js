@@ -21,24 +21,36 @@ export function hasEmoji(str = '') {
 		/[^\u0020-\u007E\u00A0-\u00BE\u2E80-\uA4CF\uF900-\uFAFF\uFE30-\uFE4F\uFF00-\uFFEF\u0080-\u009F\u2000-\u201f\u2026\u2022\u20ac\r\n]/g;
 	return str.match(reg) && str.match(reg).length
 }
+import config from '~/config'
 
 // 单张图片上传
-export const uploadImgServer = 'http://backend-api-02.newbee.ltd/manage-api/v1/upload/file'
+// export const uploadImgServer = 'http://backend-api-02.newbee.ltd/manage-api/v1/upload/file'
+export const uploadImgServer = '/api/back/files/upload'
 // 多张图片上传
-export const uploadImgsServer = 'http://backend-api-02.newbee.ltd/manage-api/v1/upload/files'
+// export const uploadImgsServer = 'http://backend-api-02.newbee.ltd/manage-api/v1/upload/files'
+export const uploadImgsServer = config[
+	import.meta.env.MODE].baseUrl + '/api/back/files/upload'
+
 
 export const pathMap = {
 	login: '登录',
 	register: '注册',
 	introduce: '系统介绍',
-	
+
 	// 系统管理
 	admin: '管理员列表',
 	admin_add: '管理员',
-	
 	menu: '菜单列表',
 	menu_add: '菜单',
+	rotate: '轮播图列表',
+	rotate_add: '轮播图',
+	change_pwd: '修改密码',
 	
+	// 医院概况
+	general_brief: '医院简介',
+	general_brief_add: '医院简介',
+
+
 	// 医院概况
 	yyjj: '医院简介',
 	ldtd: '领导团队',
@@ -92,8 +104,8 @@ export const pathMap = {
 	zpxx_detail: '招聘信息',
 	yplc: '应聘流程',
 	update_log: '更新记录',
-	
-	
+
+
 	api_test: 'api 测试',
 	good: '商品列表',
 	add_good: '添加商品',

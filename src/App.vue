@@ -11,138 +11,18 @@
 				<div class="line" />
 				<el-menu :default-openeds="state.defaultOpen" background-color="#222832" text-color="#fff"
 					:router="true" :default-active='state.currentPath'>
-					<el-sub-menu index="1">
+					
+					<el-sub-menu :index="(index+'')" v-for="(item, index) in state.menuList" :key="index">
 						<template #title>
-							<span>Dashboard</span>
+							<span>{{ item.name }}</span>
 						</template>
 						<el-menu-item-group>
-							<el-menu-item index="/introduce"><i class="el-icon-data-line" />系统介绍</el-menu-item>
+							<template v-for="(item_1, index_1) in item.sub" :key="item_1.id">
+								<el-menu-item :index="item_1.url">{{ item_1.name }}</el-menu-item>
+							</template>
+							
 							<!-- <el-menu-item index="/dashboard"><i class="el-icon-odometer" />Dashboard</el-menu-item> -->
 							<!-- <el-menu-item index="/add"><i class="el-icon-plus" />添加商品</el-menu-item> -->
-						</el-menu-item-group>
-					</el-sub-menu>
-					<el-sub-menu index="2">
-						<template #title>
-							<span>医院概况</span>
-						</template>
-						<el-menu-item-group>
-							<el-menu-item index="/"><i class="el-icon-picture" />医院简介</el-menu-item>
-							<el-menu-item index="/"><i class="el-icon-star-on" />领导团队</el-menu-item>
-							<el-menu-item index="/"><i class="el-icon-sell" />医院文化</el-menu-item>
-							<el-menu-item index="/"><i class="el-icon-thumb" />历史沿革</el-menu-item>
-							<el-menu-item index="/"><i class="el-icon-thumb" />组织机构</el-menu-item>
-							<el-menu-item index="/"><i class="el-icon-thumb" />医院荣誉</el-menu-item>
-							<el-menu-item index="/"><i class="el-icon-thumb" />未来展望</el-menu-item>
-						</el-menu-item-group>
-					</el-sub-menu>
-					<el-sub-menu index="3">
-						<template #title>
-							<span>新闻动态</span>
-						</template>
-						<el-menu-item-group>
-							<el-menu-item index="/">医院新闻</el-menu-item>
-							<el-menu-item index="/"><i class="el-icon-s-goods" />医院公告</el-menu-item>
-						</el-menu-item-group>
-					</el-sub-menu>
-					<el-sub-menu index="4">
-						<template #title>
-							<span>科室介绍</span>
-						</template>
-						<el-menu-item-group>
-							<el-menu-item index="/">科室介绍</el-menu-item>
-						</el-menu-item-group>
-					</el-sub-menu>
-					<el-sub-menu index="5">
-						<template #title>
-							<span>专家介绍</span>
-						</template>
-						<el-menu-item-group>
-							<el-menu-item index="/">专家介绍</el-menu-item>
-							<el-menu-item index="/"><i class="el-icon-s-goods" />出诊信息</el-menu-item>
-						</el-menu-item-group>
-					</el-sub-menu>
-					<el-sub-menu index="6">
-						<template #title>
-							<span>科研教学</span>
-						</template>
-						<el-menu-item-group>
-							<el-menu-item index="/">科研动态</el-menu-item>
-						</el-menu-item-group>
-					</el-sub-menu>
-					<el-sub-menu index="7">
-						<template #title>
-							<span>患者服务</span>
-						</template>
-						<el-menu-item-group>
-							<el-menu-item index="/">门诊流程</el-menu-item>
-							<el-menu-item index="/"><i class="el-icon-s-goods" />住院流程</el-menu-item>
-							<el-menu-item index="/"><i class="el-icon-s-goods" />出诊信息</el-menu-item>
-							<el-menu-item index="/"><i class="el-icon-s-goods" />检查须知</el-menu-item>
-							<el-menu-item index="/"><i class="el-icon-s-goods" />健康体检</el-menu-item>
-							<el-menu-item index="/"><i class="el-icon-s-goods" />医保指南</el-menu-item>
-							<el-menu-item index="/"><i class="el-icon-s-goods" />艾滋病</el-menu-item>
-							<el-menu-item index="/"><i class="el-icon-s-goods" />楼宇分布</el-menu-item>
-							<el-menu-item index="/"><i class="el-icon-s-goods" />联系我们</el-menu-item>
-							<el-menu-item index="/"><i class="el-icon-s-goods" />护理园地</el-menu-item>
-							<el-menu-item index="/"><i class="el-icon-s-goods" />健康促进</el-menu-item>
-						</el-menu-item-group>
-					</el-sub-menu>
-					<el-sub-menu index="8">
-						<template #title>
-							<span>党建之窗</span>
-						</template>
-						<el-menu-item-group>
-							<el-menu-item index="/">党务管理</el-menu-item>
-							<el-menu-item index="/"><i class="el-icon-s-goods" />党员教育</el-menu-item>
-							<el-menu-item index="/"><i class="el-icon-s-goods" />党风廉政</el-menu-item>
-							<el-menu-item index="/"><i class="el-icon-s-goods" />员工之家</el-menu-item>
-							<el-menu-item index="/"><i class="el-icon-s-goods" />医德医风</el-menu-item>
-							<el-menu-item index="/"><i class="el-icon-s-goods" />青年加油站</el-menu-item>
-						</el-menu-item-group>
-					</el-sub-menu>
-					<el-sub-menu index="9">
-						<template #title>
-							<span>党建之窗</span>
-						</template>
-						<el-menu-item-group>
-							<el-menu-item index="/">党务管理</el-menu-item>
-							<el-menu-item index="/"><i class="el-icon-s-goods" />党员教育</el-menu-item>
-							<el-menu-item index="/"><i class="el-icon-s-goods" />党风廉政</el-menu-item>
-							<el-menu-item index="/"><i class="el-icon-s-goods" />员工之家</el-menu-item>
-							<el-menu-item index="/"><i class="el-icon-s-goods" />医德医风</el-menu-item>
-							<el-menu-item index="/"><i class="el-icon-s-goods" />青年加油站</el-menu-item>
-						</el-menu-item-group>
-					</el-sub-menu>
-					<el-sub-menu index="10">
-						<template #title>
-							<span>人才招聘</span>
-						</template>
-						<el-menu-item-group>
-							<el-menu-item index="/">招聘信息</el-menu-item>
-							<el-menu-item index="/"><i class="el-icon-s-goods" />应聘流程</el-menu-item>
-						</el-menu-item-group>
-					</el-sub-menu>
-					<el-sub-menu index="11">
-						<template #title>
-							<span>员工之声</span>
-						</template>
-						<el-menu-item-group>
-							<el-menu-item index="/">员工之声</el-menu-item>
-						</el-menu-item-group>
-					</el-sub-menu>
-					<el-sub-menu index="12">
-						<template #title>
-							<span>系统管理</span>
-						</template>
-						<el-menu-item-group>
-							<el-menu-item index="/admin">管理员管理</el-menu-item>
-						</el-menu-item-group>
-						<el-menu-item-group>
-							<el-menu-item index="/menu">菜单管理</el-menu-item>
-						</el-menu-item-group>
-						<el-menu-item-group>
-							<el-menu-item index="/">首页轮播图</el-menu-item>
-							<!-- <el-menu-item index="/account">修改密码</el-menu-item> -->
 						</el-menu-item-group>
 					</el-sub-menu>
 				</el-menu>
@@ -163,6 +43,7 @@
 
 <script>
 	import {
+		onMounted,
 		onUnmounted,
 		reactive
 	} from 'vue'
@@ -173,8 +54,10 @@
 	} from 'vue-router'
 	import {
 		pathMap,
-		sessionGet
+		sessionGet,
+		sessionSet,
 	} from '@/utils'
+	import axios from '@/utils/axios'
 	export default {
 		name: 'App',
 		components: {
@@ -187,6 +70,7 @@
 			const state = reactive({
 				defaultOpen: ['1'],
 				showMenu: true,
+				menuList: [],
 				currentPath: '/dashboard',
 				count: {
 					number: 1
@@ -201,6 +85,22 @@
 					}
 				}, false);
 			}
+			
+			onMounted(() => {
+				const menu_list = sessionGet('menu_list')
+				if (menu_list) {
+					state.menuList = menu_list
+				} else {
+					get_menu_list()
+				}
+			})
+			
+			const get_menu_list = async () => {
+				const menu_list = await axios.get('/api/back/menus/list')
+				state.menuList = menu_list.data
+				sessionSet('menu_list', menu_list.data);
+			}
+			
 			const unwatch = router.beforeEach((to, from, next) => {
 				if (to.path == '/login') {
 					// 如果路径是 /login 则正常执行

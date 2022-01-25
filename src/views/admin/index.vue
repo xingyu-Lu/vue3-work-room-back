@@ -1,12 +1,12 @@
 <template>
-	<el-card>
+	<el-card style="min-height: 100%;">
 		<template #header>
 			<!-- <div class="header"> -->
 				<el-button type="primary" :icon="Plus" @click="handleAdd">新增管理员</el-button>
 			<!-- </div> -->
 		</template>
 
-		<el-table :data="tableData" stripe style="width: 100%">
+		<el-table v-loading="loading" :data="tableData" stripe style="width: 100%">
 			<el-table-column prop="id" label="id" />
 			<el-table-column prop="name" label="账号" />
 			<el-table-column prop="status" label="状态">
@@ -58,7 +58,7 @@
 			const multipleTable = ref(null)
 			const router = useRouter()
 			const state = reactive({
-				loading: true,
+				loading: false,
 				tableData: [], // 数据列表
 				multipleSelection: [], // 选中项
 				total: 0, // 总条数
@@ -81,7 +81,7 @@
 					state.pageSize = res.pagination.perPage
 					state.total = res.pagination.total
 					state.currentPage = res.pagination.currentPage
-					state.loading = true
+					state.loading = false
 				})
 			}
 

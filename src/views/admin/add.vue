@@ -1,5 +1,5 @@
 <template>
-	<el-card>
+	<el-card style="min-height: 100%;">
 		<el-form :model="adminForm" :rules="rules" ref="adminRef" label-width="100px">
 			<el-form-item label="账号" prop="name">
 				<el-input v-model="adminForm.name" placeholder="请输入账号名称"></el-input>

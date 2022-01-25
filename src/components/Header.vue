@@ -55,14 +55,18 @@ export default {
     })
     const getUserInfo = async () => {
       const userInfo = await axios.get('/api/back/admins/info')
-	  sessionSet('userinfo', userInfo);
+	  sessionSet('userinfo', userInfo.data);
       state.userInfo = userInfo
     }
     const logout = () => {
-      axios.delete('/logout').then(() => {
-        sessionRemove('token')
-        window.location.reload()
-      })
+      // axios.delete('/logout').then(() => {
+      //   sessionRemove('token')
+      //   window.location.reload()
+      // })
+	  sessionRemove('token')
+	  sessionRemove('menu_list')
+	  sessionRemove('userinfo')
+	  window.location.reload()
     }
     const back = () => {
       router.back()

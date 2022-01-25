@@ -25,6 +25,11 @@ const router = createRouter({
 		component: () => import(/* webpackChunkName: "introduce" */ '../views/admin/add.vue')
 	},
 	{
+		path: '/admin/changepwd',
+		name: 'change_pwd',
+		component: () => import(/* webpackChunkName: "introduce" */ '../views/admin/changepwd.vue')
+	},
+	{
 		path: '/menu',
 		name: 'menu',
 		component: () => import(/* webpackChunkName: "introduce" */ '../views/menu/index.vue')
@@ -34,6 +39,28 @@ const router = createRouter({
 		name: 'menu_add',
 		component: () => import(/* webpackChunkName: "introduce" */ '../views/menu/add.vue')
 	},
+	{
+		path: '/rotate',
+		name: 'rotate',
+		component: () => import(/* webpackChunkName: "introduce" */ '../views/rotate/index.vue')
+	},
+	{
+		path: '/rotate/add',
+		name: 'rotate_add',
+		component: () => import(/* webpackChunkName: "introduce" */ '../views/rotate/add.vue')
+	},
+	// 医院概况
+	{
+		path: '/general/brief',
+		name: 'general_brief',
+		component: () => import(/* webpackChunkName: "introduce" */ '../views/general/brief/index.vue')
+	},
+	{
+		path: '/general/brief/add',
+		name: 'general_brief_add',
+		component: () => import(/* webpackChunkName: "introduce" */ '../views/general/brief/add.vue')
+	},
+	
 	
 	
 	
