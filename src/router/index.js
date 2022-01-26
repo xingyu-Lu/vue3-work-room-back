@@ -60,6 +60,66 @@ const router = createRouter({
 		name: 'brief_add',
 		component: () => import(/* webpackChunkName: "introduce" */ '../views/general/brief/add.vue')
 	},
+	{
+		path: '/leader',
+		name: 'leader',
+		component: () => import(/* webpackChunkName: "introduce" */ '../views/general/leader/index.vue')
+	},
+	{
+		path: '/leader-add',
+		name: 'leader_add',
+		component: () => import(/* webpackChunkName: "introduce" */ '../views/general/leader/add.vue')
+	},
+	{
+		path: '/culture',
+		name: 'culture',
+		component: () => import(/* webpackChunkName: "introduce" */ '../views/general/culture/index.vue')
+	},
+	{
+		path: '/culture-add',
+		name: 'culture_add',
+		component: () => import(/* webpackChunkName: "introduce" */ '../views/general/culture/add.vue')
+	},
+	{
+		path: '/history',
+		name: 'history',
+		component: () => import(/* webpackChunkName: "introduce" */ '../views/general/history/index.vue')
+	},
+	{
+		path: '/history-add',
+		name: 'history_add',
+		component: () => import(/* webpackChunkName: "introduce" */ '../views/general/history/add.vue')
+	},
+	{
+		path: '/history-leader',
+		name: 'history_leader',
+		component: () => import(/* webpackChunkName: "introduce" */ '../views/general/history-leader/index.vue')
+	},
+	{
+		path: '/history-leader-add',
+		name: 'history_leader_add',
+		component: () => import(/* webpackChunkName: "introduce" */ '../views/general/history-leader/add.vue')
+	},
+	{
+		path: '/history-pic',
+		name: 'history_pic',
+		component: () => import(/* webpackChunkName: "introduce" */ '../views/general/history-pic/index.vue')
+	},
+	{
+		path: '/history-pic-add',
+		name: 'history_pic_add',
+		component: () => import(/* webpackChunkName: "introduce" */ '../views/general/history-pic/add.vue')
+	},
+	{
+		path: '/organization',
+		name: 'organization',
+		component: () => import(/* webpackChunkName: "introduce" */ '../views/general/organization/index.vue')
+	},
+	{
+		path: '/organization-add',
+		name: 'organization_add',
+		component: () => import(/* webpackChunkName: "introduce" */ '../views/general/organization/add.vue')
+	},
 	
 	
 	

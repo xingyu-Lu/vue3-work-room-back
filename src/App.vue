@@ -5,7 +5,7 @@
 				<div class="head">
 					<div>
 						<!-- <img src="/src/assets/hospital_logo.jpg" alt="logo"> -->
-						<span>宜宾市第三人民医院</span>
+						<a href="/" style="color: white; font-size: 18px;">宜宾市第三人民医院</a>
 					</div>
 				</div>
 				<div class="line" />

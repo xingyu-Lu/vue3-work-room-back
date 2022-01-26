@@ -1,10 +1,10 @@
 <template>
 	<el-card style="min-height: 100%;">
-		<el-form :model="rotateForm" :rules="rules" ref="rotateRef" label-width="100px">
+		<el-form :model="historyPicForm" :rules="rules" ref="historyPicRef" label-width="100px">
 			<el-form-item label="图片" prop="img">
 				<el-upload ref="uploadRef" :action="uploadImgServer" :data="{ basket: 'img' }" :limit="1" list-type="picture-card"
 					thumbnail-mode=true :headers="{ Authorization: token }" :before-upload="handleBeforeUpload"
-					:on-success="handleUrlSuccess" :on-error="handleUrlError" :auto-upload="true" :file-list="rotateForm.fileList">
+					:on-success="handleUrlSuccess" :on-error="handleUrlError" :auto-upload="true" :file-list="historyPicForm.fileList">
 					<template #default>
 						<el-icon>
 							<plus />
@@ -12,9 +12,9 @@
 					</template>
 					<template #file="{ file }">
 						<div>
-							<img class="el-upload-list__item-thumbnail" :src="file.url" alt="" />
+							<img class="el-upload-list__item-thumbnail" v-if="historyPicForm.img_url" :src="historyPicForm.img_url" alt="" />
 							<span class="el-upload-list__item-actions">
-								<span v-if="rotateForm.disabled" class="el-upload-list__item-delete" @click="handleRemove">
+								<span v-if="historyPicForm.disabled" class="el-upload-list__item-delete" @click="handleRemove">
 									<el-icon>
 										<delete />
 									</el-icon>
@@ -24,13 +24,16 @@
 					</template>
 				</el-upload>
 			</el-form-item>
+			<el-form-item label="标题" prop="title">
+				<el-input v-model="historyPicForm.title" placeholder="请输入标题" type="text"></el-input>
+			</el-form-item>
 			<el-form-item label="排序" prop="sort">
-				<el-input v-model="rotateForm.sort" placeholder="请输入排序" type="number" min="0"></el-input>
+				<el-input v-model="historyPicForm.sort" placeholder="请输入排序" type="number" min="0"></el-input>
 			</el-form-item>
 			<el-form-item label="状态" prop="status">
-				<el-radio-group v-model="rotateForm.status">
-					<el-radio label=1>开启</el-radio>
-					<el-radio label=0>禁用</el-radio>
+				<el-radio-group v-model="historyPicForm.status" disabled>
+					<el-radio label=1>已审核</el-radio>
+					<el-radio label=0>待审核</el-radio>
 				</el-radio-group>
 			</el-form-item>
 			<el-form-item>
@@ -66,13 +69,13 @@
 	} from '@/utils'
 
 	export default {
-		name: 'rotate_add',
+		name: 'historyPic_add',
 		components: {
 			Plus,
 			Delete
 		},
 		setup() {
-			const rotateRef = ref(null)
+			const historyPicRef = ref(null)
 			const uploadRef = ref(null)
 			const route = useRoute()
 			const router = useRouter()
@@ -83,10 +86,12 @@
 			const state = reactive({
 				token: 'Bearer ' + sessionGet('token') || '',
 				id: id,
-				rotateForm: {
+				historyPicForm: {
+					img_url: '',
 					img: '',
+					title: '',
 					sort: 0,
-					status: '1',
+					status: '0',
 					disabled: true,
 					fileList: []
 				},
@@ -96,13 +101,23 @@
 						message: '图片必须',
 						trigger: ['change'],
 					}],
+					title: [{
+						required: 'true',
+						message: '标题必须',
+						trigger: ['change'],
+					}],
+					time: [{
+						required: 'true',
+						message: '任职时间必须',
+						trigger: ['change'],
+					}],
 					sort: [{
 						required: 'true',
 						message: '排序必须',
 						trigger: ['change'],
 					}],
 					status: [{
-						required: 'true',
+						required: false,
 						message: '状态必须',
 						trigger: ['change'],
 					}],
@@ -110,26 +125,50 @@
 			})
 
 			onMounted(() => {
-
+				if (id) {
+					axios.get(`/api/back/historyPics/${id}`).then(res => {
+						state.historyPicForm = {
+							img_url: res.data.url || '',
+							img: res.data.file_id,
+							title: res.data.title,
+							sort: res.data.sort,
+							status: String(res.data.status),
+							fileList: [res.data.url],
+							disabled: true
+						}
+					})
+				}
 			})
 
 			const submitAdd = () => {
-				rotateRef.value.validate((vaild) => {
+				historyPicRef.value.validate((vaild) => {
 					if (vaild) {
 						// 默认新增用 post 方法
 						let httpOption = axios.post
 						let params = {
-							img: state.rotateForm.img,
-							sort: state.rotateForm.sort,
-							status: state.rotateForm.status,
+							img: state.historyPicForm.img,
+							title: state.historyPicForm.title,
+							sort: state.historyPicForm.sort,
+							status: state.historyPicForm.status,
 						}
 
-						let url = '/api/back/rotates'
 
+						let url = '/api/back/historyPics'
+						if (id) {
+							// params.id = id
+							// 修改商品使用 put 方法
+							httpOption = axios.put
+							url = `/api/back/historyPics/${id}`
+						}
+						
 						httpOption(url, params).then(() => {
-							ElMessage.success('添加成功')
+							if (id) {
+								ElMessage.success('修改成功')
+							} else {
+								ElMessage.success('添加成功')
+							}
 							router.push({
-								path: '/rotate'
+								path: '/history-pic'
 							})
 						})
 					}
@@ -146,7 +185,8 @@
 
 			const handleUrlSuccess = (val) => {
 				ElMessage.success('上传成功')
-				state.rotateForm.img = val.data.id || ''
+				state.historyPicForm.img_url = val.data.src || ''
+				state.historyPicForm.img = val.data.id || ''
 			}
 			
 			const handleUrlError = (val) => {
@@ -155,13 +195,13 @@
 
 			const handleRemove = (file) => {
 				uploadRef.value.clearFiles()
-				state.rotateForm.img = ''
+				state.historyPicForm.img = ''
 			}
 
 			return {
 				...toRefs(state),
 				uploadRef,
-				rotateRef,
+				historyPicRef,
 				submitAdd,
 				uploadImgServer,
 				handleBeforeUpload,

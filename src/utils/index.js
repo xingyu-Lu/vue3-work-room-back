@@ -48,6 +48,18 @@ export const pathMap = {
 	// 医院概况
 	brief: '医院简介',
 	brief_add: '医院简介',
+	leader: '领导团队',
+	leader_add: '领导团队',
+	culture: '医院文化',
+	culture_add: '医院文化',
+	history: '历史沿革',
+	history_add: '历史沿革',
+	history_leader: '历任院长',
+	history_leader_add: '历任院长',
+	history_pic: '历史照片',
+	history_pic_add: '历史照片',
+	organization: '组织机构',
+	organization_add: '组织机构',
 
 
 	// 医院概况

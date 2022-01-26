@@ -52,11 +52,11 @@
 			})
 
 			onMounted(() => {
-				getBrief()
+				getCulture()
 			})
 
-			const getBrief = () => {
-				axios.get('/api/back/briefs').then(res => {
+			const getCulture = () => {
+				axios.get('/api/back/cultures').then(res => {
 					if (res.data) {
 						state.data.content = res.data.content
 						state.data.id = res.data.id
@@ -68,13 +68,13 @@
 
 			const handleAdd = () => {
 				router.push({
-					path: '/brief-add'
+					path: '/culture-add'
 				})
 			}
 
 			const handleEdit = (id) => {
 				router.push({
-					path: '/brief-add',
+					path: '/culture-add',
 					query: {
 						id
 					}
@@ -82,7 +82,7 @@
 			}
 			
 			const handleCheck = (id) => {
-				axios.put('/api/back/briefs/status', {
+				axios.put('/api/back/cultures/status', {
 					id: id,
 				}).then(() => {
 					ElMessage.success('审核成功')

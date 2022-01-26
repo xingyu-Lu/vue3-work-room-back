@@ -1,6 +1,6 @@
 <template>
 	<el-card style="min-height: 100%;">
-		<el-form :model="briefForm" :rules="rules" ref="briefRef" label-width="100px" style="margin-top: 30px;">
+		<el-form :model="cultureForm" :rules="rules" ref="cultureRef" label-width="100px" style="margin-top: 30px;">
 			<el-form-item label="内容" prop="content">
 				<div ref='editor'></div>
 			</el-form-item>
@@ -37,10 +37,10 @@
 	} from '@/utils'
 
 	export default {
-		name: 'brief_add',
+		name: 'culture_add',
 		setup() {
 			const editor = ref(null)
-			const briefRef = ref(null)
+			const cultureRef = ref(null)
 			const route = useRoute()
 			const router = useRouter()
 			const {
@@ -49,7 +49,7 @@
 			const state = reactive({
 				token: 'Bearer ' + sessionGet('token') || '',
 				id: id,
-				briefForm: {
+				cultureForm: {
 					content: '',
 				},
 
@@ -124,8 +124,8 @@
 				
 				instance.create()
 				if (id) {
-					axios.get(`/api/back/briefs/${id}`).then(res => {
-						state.briefForm = {
+					axios.get(`/api/back/cultures/${id}`).then(res => {
+						state.cultureForm = {
 							content: res.data.content
 						}
 						if (instance) {
@@ -141,7 +141,7 @@
 			})
 			
 			const submitAdd = () => {
-				briefRef.value.validate((vaild) => {
+				cultureRef.value.validate((vaild) => {
 					if (vaild) {
 						// 默认新增用 post 方法
 						let httpOption = axios.post
@@ -149,13 +149,13 @@
 							content: instance.txt.html(),
 						}
 			
-						let url = '/api/back/briefs'
+						let url = '/api/back/cultures'
 						
 						if (id) {
 							// params.id = id
 							// 修改商品使用 put 方法
 							httpOption = axios.put
-							url = `/api/back/briefs/${id}`
+							url = `/api/back/cultures/${id}`
 						}
 			
 						httpOption(url, params).then(() => {
@@ -165,7 +165,7 @@
 								ElMessage.success('添加成功')
 							}
 							router.push({
-								path: '/brief'
+								path: '/culture'
 							})
 						})
 					}
@@ -175,7 +175,7 @@
 			return {
 				...toRefs(state),
 				editor,
-				briefRef,
+				cultureRef,
 				submitAdd
 			}
 		}

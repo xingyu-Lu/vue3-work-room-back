@@ -1,10 +1,10 @@
 <template>
 	<el-card style="min-height: 100%;">
-		<el-form :model="rotateForm" :rules="rules" ref="rotateRef" label-width="100px">
+		<el-form :model="leaderForm" :rules="rules" ref="leaderRef" label-width="100px">
 			<el-form-item label="图片" prop="img">
 				<el-upload ref="uploadRef" :action="uploadImgServer" :data="{ basket: 'img' }" :limit="1" list-type="picture-card"
 					thumbnail-mode=true :headers="{ Authorization: token }" :before-upload="handleBeforeUpload"
-					:on-success="handleUrlSuccess" :on-error="handleUrlError" :auto-upload="true" :file-list="rotateForm.fileList">
+					:on-success="handleUrlSuccess" :on-error="handleUrlError" :auto-upload="true" :file-list="leaderForm.fileList">
 					<template #default>
 						<el-icon>
 							<plus />
@@ -12,9 +12,9 @@
 					</template>
 					<template #file="{ file }">
 						<div>
-							<img class="el-upload-list__item-thumbnail" :src="file.url" alt="" />
+							<img class="el-upload-list__item-thumbnail" v-if="leaderForm.img_url" :src="leaderForm.img_url" alt="" />
 							<span class="el-upload-list__item-actions">
-								<span v-if="rotateForm.disabled" class="el-upload-list__item-delete" @click="handleRemove">
+								<span v-if="leaderForm.disabled" class="el-upload-list__item-delete" @click="handleRemove">
 									<el-icon>
 										<delete />
 									</el-icon>
@@ -24,13 +24,22 @@
 					</template>
 				</el-upload>
 			</el-form-item>
+			<el-form-item label="姓名" prop="position">
+				<el-input v-model="leaderForm.name" placeholder="请输入姓名" type="text"></el-input>
+			</el-form-item>
+			<el-form-item label="职务" prop="position">
+				<el-input v-model="leaderForm.position" placeholder="请输入职务" type="text"></el-input>
+			</el-form-item>
+			<el-form-item label="职称" prop="professional">
+				<el-input v-model="leaderForm.professional" placeholder="请输入职称" type="text"></el-input>
+			</el-form-item>
 			<el-form-item label="排序" prop="sort">
-				<el-input v-model="rotateForm.sort" placeholder="请输入排序" type="number" min="0"></el-input>
+				<el-input v-model="leaderForm.sort" placeholder="请输入排序" type="number" min="0"></el-input>
 			</el-form-item>
 			<el-form-item label="状态" prop="status">
-				<el-radio-group v-model="rotateForm.status">
-					<el-radio label=1>开启</el-radio>
-					<el-radio label=0>禁用</el-radio>
+				<el-radio-group v-model="leaderForm.status" disabled>
+					<el-radio label=1>已审核</el-radio>
+					<el-radio label=0>待审核</el-radio>
 				</el-radio-group>
 			</el-form-item>
 			<el-form-item>
@@ -66,13 +75,13 @@
 	} from '@/utils'
 
 	export default {
-		name: 'rotate_add',
+		name: 'leader_add',
 		components: {
 			Plus,
 			Delete
 		},
 		setup() {
-			const rotateRef = ref(null)
+			const leaderRef = ref(null)
 			const uploadRef = ref(null)
 			const route = useRoute()
 			const router = useRouter()
@@ -83,10 +92,14 @@
 			const state = reactive({
 				token: 'Bearer ' + sessionGet('token') || '',
 				id: id,
-				rotateForm: {
+				leaderForm: {
+					img_url: '',
 					img: '',
+					name: '',
+					position: '',
+					professional: '',
 					sort: 0,
-					status: '1',
+					status: '0',
 					disabled: true,
 					fileList: []
 				},
@@ -96,13 +109,28 @@
 						message: '图片必须',
 						trigger: ['change'],
 					}],
+					name: [{
+						required: 'true',
+						message: '姓名必须',
+						trigger: ['change'],
+					}],
+					position: [{
+						required: 'true',
+						message: '职务必须',
+						trigger: ['change'],
+					}],
+					professional: [{
+						required: 'true',
+						message: '职称必须',
+						trigger: ['change'],
+					}],
 					sort: [{
 						required: 'true',
 						message: '排序必须',
 						trigger: ['change'],
 					}],
 					status: [{
-						required: 'true',
+						required: false,
 						message: '状态必须',
 						trigger: ['change'],
 					}],
@@ -110,26 +138,54 @@
 			})
 
 			onMounted(() => {
-
+				if (id) {
+					axios.get(`/api/back/leaders/${id}`).then(res => {
+						state.leaderForm = {
+							img_url: res.data.url || '',
+							img: res.data.file_id,
+							name: res.data.name,
+							position: res.data.position,
+							professional: res.data.professional,
+							sort: res.data.sort,
+							status: String(res.data.status),
+							fileList: [res.data.url],
+							disabled: true
+						}
+					})
+				}
 			})
 
 			const submitAdd = () => {
-				rotateRef.value.validate((vaild) => {
+				leaderRef.value.validate((vaild) => {
 					if (vaild) {
 						// 默认新增用 post 方法
 						let httpOption = axios.post
 						let params = {
-							img: state.rotateForm.img,
-							sort: state.rotateForm.sort,
-							status: state.rotateForm.status,
+							img: state.leaderForm.img,
+							name: state.leaderForm.name,
+							position: state.leaderForm.position,
+							professional: state.leaderForm.professional,
+							sort: state.leaderForm.sort,
+							status: state.leaderForm.status,
 						}
 
-						let url = '/api/back/rotates'
 
+						let url = '/api/back/leaders'
+						if (id) {
+							// params.id = id
+							// 修改商品使用 put 方法
+							httpOption = axios.put
+							url = `/api/back/leaders/${id}`
+						}
+						
 						httpOption(url, params).then(() => {
-							ElMessage.success('添加成功')
+							if (id) {
+								ElMessage.success('修改成功')
+							} else {
+								ElMessage.success('添加成功')
+							}
 							router.push({
-								path: '/rotate'
+								path: '/leader'
 							})
 						})
 					}
@@ -146,7 +202,8 @@
 
 			const handleUrlSuccess = (val) => {
 				ElMessage.success('上传成功')
-				state.rotateForm.img = val.data.id || ''
+				state.leaderForm.img_url = val.data.src || ''
+				state.leaderForm.img = val.data.id || ''
 			}
 			
 			const handleUrlError = (val) => {
@@ -155,13 +212,13 @@
 
 			const handleRemove = (file) => {
 				uploadRef.value.clearFiles()
-				state.rotateForm.img = ''
+				state.leaderForm.img = ''
 			}
 
 			return {
 				...toRefs(state),
 				uploadRef,
-				rotateRef,
+				leaderRef,
 				submitAdd,
 				uploadImgServer,
 				handleBeforeUpload,
