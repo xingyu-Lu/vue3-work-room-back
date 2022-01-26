@@ -89,7 +89,7 @@
 
 			const handleAdd = () => {
 				router.push({
-					path: '/rotate/add'
+					path: '/rotate-add'
 				})
 			}
 

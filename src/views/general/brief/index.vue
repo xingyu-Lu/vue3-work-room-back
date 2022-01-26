@@ -68,13 +68,13 @@
 
 			const handleAdd = () => {
 				router.push({
-					path: '/general/brief/add'
+					path: '/brief_add'
 				})
 			}
 
 			const handleEdit = (id) => {
 				router.push({
-					path: '/general/brief/add',
+					path: '/brief-add',
 					query: {
 						id
 					}

@@ -161,7 +161,7 @@
 						httpOption(url, params).then(() => {
 							ElMessage.success('添加成功')
 							router.push({
-								path: '/general/brief'
+								path: '/brief'
 							})
 						})
 					}

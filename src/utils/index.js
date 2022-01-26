@@ -46,8 +46,8 @@ export const pathMap = {
 	change_pwd: '修改密码',
 	
 	// 医院概况
-	general_brief: '医院简介',
-	general_brief_add: '医院简介',
+	brief: '医院简介',
+	brief_add: '医院简介',
 
 
 	// 医院概况

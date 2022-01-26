@@ -92,13 +92,13 @@
 
 			const handleAdd = () => {
 				router.push({
-					path: '/admin/add'
+					path: '/admin-add'
 				})
 			}
 
 			const handleEdit = (id) => {
 				router.push({
-					path: '/admin/add',
+					path: '/admin-add',
 					query: {
 						id
 					}
