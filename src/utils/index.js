@@ -64,6 +64,7 @@ export const pathMap = {
 	// 新闻公告
 	news: '新闻公告',
 	news_add: '新闻公告',
+	news_preview: '新闻预览',
 
 
 	// 医院概况
