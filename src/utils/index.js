@@ -60,6 +60,10 @@ export const pathMap = {
 	history_pic_add: '历史照片',
 	organization: '组织机构',
 	organization_add: '组织机构',
+	
+	// 新闻公告
+	news: '新闻公告',
+	news_add: '新闻公告',
 
 
 	// 医院概况

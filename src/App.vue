@@ -1,50 +1,54 @@
 <template>
-	<div class="layout">
-		<el-container v-if="state.showMenu" class="container">
-			<el-aside class="aside">
-				<div class="head">
-					<div>
-						<!-- <img src="/src/assets/hospital_logo.jpg" alt="logo"> -->
-						<a href="/" style="color: white; font-size: 18px;">宜宾市第三人民医院</a>
+	<el-config-provider :locale="locale">
+		<div class="layout">
+			<el-container v-if="state.showMenu" class="container">
+				<el-aside class="aside">
+					<div class="head">
+						<div>
+							<!-- <img src="/src/assets/hospital_logo.jpg" alt="logo"> -->
+							<a href="/" style="color: white; font-size: 18px;">宜宾市第三人民医院</a>
+						</div>
 					</div>
-				</div>
-				<div class="line" />
-				<el-menu :default-openeds="state.defaultOpen" background-color="#222832" text-color="#fff"
-					:router="true" :default-active='state.currentPath'>
-					
-					<el-sub-menu :index="(index+'')" v-for="(item, index) in state.menuList" :key="index">
-						<template #title>
-							<span>{{ item.name }}</span>
-						</template>
-						<el-menu-item-group>
-							<template v-for="(item_1, index_1) in item.sub" :key="item_1.id">
-								<el-menu-item :index="item_1.url">{{ item_1.name }}</el-menu-item>
+					<div class="line" />
+					<el-menu :default-openeds="state.defaultOpen" background-color="#222832" text-color="#fff"
+						:router="true" :default-active='state.currentPath'>
+						
+						<el-sub-menu :index="(index+'')" v-for="(item, index) in state.menuList" :key="index">
+							<template #title>
+								<span>{{ item.name }}</span>
 							</template>
-							
-							<!-- <el-menu-item index="/dashboard"><i class="el-icon-odometer" />Dashboard</el-menu-item> -->
-							<!-- <el-menu-item index="/add"><i class="el-icon-plus" />添加商品</el-menu-item> -->
-						</el-menu-item-group>
-					</el-sub-menu>
-				</el-menu>
-			</el-aside>
-			<el-container class="content">
-				<Header />
-				<div class="main">
-					<router-view />
-				</div>
-				<Footer />
+							<el-menu-item-group>
+								<template v-for="(item_1, index_1) in item.sub" :key="item_1.id">
+									<el-menu-item :index="item_1.url">{{ item_1.name }}</el-menu-item>
+								</template>
+								
+								<!-- <el-menu-item index="/dashboard"><i class="el-icon-odometer" />Dashboard</el-menu-item> -->
+								<!-- <el-menu-item index="/add"><i class="el-icon-plus" />添加商品</el-menu-item> -->
+							</el-menu-item-group>
+						</el-sub-menu>
+					</el-menu>
+				</el-aside>
+				<el-container class="content">
+					<Header />
+					<div class="main">
+						<router-view />
+					</div>
+					<Footer />
+				</el-container>
 			</el-container>
-		</el-container>
-		<el-container v-else class="container">
-			<router-view />
-		</el-container>
-	</div>
+			<el-container v-else class="container">
+				<router-view />
+			</el-container>
+		</div>
+	</el-config-provider>
 </template>
 
 <script>
+	import zhCn from 'element-plus/lib/locale/lang/zh-cn'
 	import {
 		onMounted,
 		onUnmounted,
+		ref,
 		reactive
 	} from 'vue'
 	import Header from '@/components/Header.vue'
@@ -62,7 +66,7 @@
 		name: 'App',
 		components: {
 			Header,
-			Footer
+			Footer,
 		},
 		setup() {
 			const noMenu = ['/login']
@@ -128,6 +132,7 @@
 
 			return {
 				state,
+				locale: zhCn,
 			}
 		}
 	}

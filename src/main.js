@@ -2,6 +2,7 @@ import {
 	createApp
 } from 'vue'
 import {
+	ElDatePicker,
 	ElSwitch,
 	ElSpace,
 	ElDivider,
@@ -47,7 +48,8 @@ import {
 	ElRadio,
 	ElCascader,
 	ElCheckbox,
-	ElInputNumber
+	ElInputNumber,
+	ElConfigProvider
 } from 'element-plus'
 import 'element-plus/dist/index.css'
 import App from './App.vue'
@@ -56,7 +58,7 @@ import router from './router/index.js'
 const app = createApp(App)
 
 app.use(router)
-app.use(ElSwitch).use(ElSpace).use(ElDivider).use(ElTimeline).use(ElTimelineItem).use(ElEmpty).use(ElBreadcrumb).use(ElCarousel).use(ElCarouselItem).use(ElIcon).use(ElCollapseTransition).use(ElRow)
+app.use(ElDatePicker).use(ElConfigProvider).use(ElSwitch).use(ElSpace).use(ElDivider).use(ElTimeline).use(ElTimelineItem).use(ElEmpty).use(ElBreadcrumb).use(ElCarousel).use(ElCarouselItem).use(ElIcon).use(ElCollapseTransition).use(ElRow)
 	.use(ElCol)
 	.use(ElLink)
 	.use(ElImage)
