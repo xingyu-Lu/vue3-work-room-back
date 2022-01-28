@@ -9,9 +9,10 @@
 				</el-select>
 			</el-form-item>
 			<el-form-item label="封面图" prop="img">
-				<el-upload ref="uploadRef" :action="uploadImgServer" :data="{ basket: 'img' }" :limit="1" list-type="picture-card"
-					thumbnail-mode=true :headers="{ Authorization: token }" :before-upload="handleBeforeUpload"
-					:on-success="handleUrlSuccess" :on-error="handleUrlError" :auto-upload="true" :file-list="Form.fileList">
+				<el-upload ref="uploadRef" :action="uploadImgServer" :data="{ basket: 'img' }" :limit="1"
+					list-type="picture-card" thumbnail-mode=true :headers="{ Authorization: token }"
+					:before-upload="handleBeforeUpload" :on-success="handleUrlSuccess" :on-error="handleUrlError"
+					:auto-upload="true" :file-list="Form.fileList">
 					<template #default>
 						<el-icon>
 							<plus />
@@ -19,7 +20,8 @@
 					</template>
 					<template #file="{ file }">
 						<div>
-							<img class="el-upload-list__item-thumbnail" v-if="Form.img_url" :src="Form.img_url" alt="" />
+							<img class="el-upload-list__item-thumbnail" v-if="Form.img_url" :src="Form.img_url"
+								alt="" />
 							<span class="el-upload-list__item-actions">
 								<span v-if="Form.disabled" class="el-upload-list__item-delete" @click="handleRemove">
 									<el-icon>
@@ -31,6 +33,11 @@
 					</template>
 				</el-upload>
 			</el-form-item>
+			<el-form-item label="附件" prop='attachment'>
+				<el-upload ref="attachmentRef" :headers="{ Authorization: token }" :action="uploadImgServer" :on-remove="handleAttachmentRemove" :on-success="handleAttachmentSuccess" :auto-upload="true" :data="{ basket: 'attachment' }" :limit="3" multiple :file-list="Form.attachmentFileList">
+					<el-button type="primary">上传</el-button>
+				</el-upload>
+			</el-form-item>
 			<el-form-item label="标题" prop="title">
 				<el-input v-model="Form.title" placeholder="请输入标题" type="text"></el-input>
 			</el-form-item>
@@ -38,7 +45,8 @@
 				<div ref='editor' style="z-index: 1;"></div>
 			</el-form-item>
 			<el-form-item label="发布时间" prop="release_time">
-				<el-date-picker v-model="Form.release_time" type="datetime" :default-value="new Date()" placeholder="请输入发布时间">
+				<el-date-picker v-model="Form.release_time" type="datetime" :default-value="new Date()"
+					placeholder="请输入发布时间">
 				</el-date-picker>
 			</el-form-item>
 			<el-form-item label="状态" prop="status">
@@ -88,6 +96,7 @@
 			Delete
 		},
 		setup() {
+			const attachmentRef = ref(null)
 			const Ref = ref(null)
 			const editor = ref(null)
 			const uploadRef = ref(null)
@@ -101,6 +110,7 @@
 				token: 'Bearer ' + sessionGet('token') || '',
 				id: id,
 				Form: {
+					attachment: '',
 					img_url: '',
 					img: '',
 					type: '0',
@@ -109,7 +119,8 @@
 					release_time: ref(''),
 					status: '0',
 					disabled: true,
-					fileList: []
+					fileList: [],
+					attachmentFileList: []
 				},
 				rules: {
 					img: [{
@@ -176,35 +187,37 @@
 						console.log('change')
 					},
 				})
-				
+
 				instance.config.uploadVideoServer = uploadImgsServer
 				instance.config.uploadVideoMaxSize = 1 * 200 * 1024 * 1024 // 1024m
 				instance.config.uploadVideoAccept = ['mp4']
 				instance.config.uploadVideoParams = {
-				    basket: 'video',
+					basket: 'video',
 				}
 				instance.config.uploadVideoName = 'file'
 				instance.config.uploadVideoHeaders = {
-				    Authorization: state.token
+					Authorization: state.token
 				}
-				
+
 				instance.config.uploadVideoHooks = {
 					// 视频上传并返回了结果，想要自己把视频插入到编辑器中
 					// 例如服务器端返回的不是 { errno: 0, data: { url : '.....'} } 这种格式，可使用 customInsert
 					customInsert: function(insertVideoFn, result) {
 						// result 即服务端返回的接口
 						console.log('customInsert', result)
-				
+
 						// insertVideoFn 可把视频插入到编辑器，传入视频 src ，执行函数即可
 						insertVideoFn(result.data.src)
 					}
 				}
-				
+
 				instance.create()
-				
+
 				if (id) {
 					axios.get(`/api/back/news/${id}`).then(res => {
 						state.Form = {
+							attachment: res.data.attachment_id,
+							attachmentFileList: res.data.attachment,
 							img_url: res.data.url || '',
 							img: res.data.file_id,
 							type: String(res.data.type),
@@ -214,7 +227,7 @@
 							fileList: [res.data.url],
 							disabled: true
 						}
-						
+
 						if (instance) {
 							// 初始化商品详情 html
 							instance.txt.html(res.data.content)
@@ -222,7 +235,7 @@
 					})
 				}
 			})
-			
+
 			onBeforeUnmount(() => {
 				instance.destroy()
 				instance = null
@@ -234,6 +247,7 @@
 						// 默认新增用 post 方法
 						let httpOption = axios.post
 						let params = {
+							attachment: state.Form.attachment,
 							img: state.Form.img,
 							type: state.Form.type,
 							title: state.Form.title,
@@ -250,7 +264,7 @@
 							httpOption = axios.put
 							url = `/api/back/news/${id}`
 						}
-						
+
 						httpOption(url, params).then(() => {
 							if (id) {
 								ElMessage.success('修改成功')
@@ -278,7 +292,7 @@
 				state.Form.img_url = val.data.src || ''
 				state.Form.img = val.data.id || ''
 			}
-			
+
 			const handleUrlError = (val) => {
 				ElMessage.error('上传失败')
 			}
@@ -287,10 +301,27 @@
 				uploadRef.value.clearFiles()
 				state.Form.img = ''
 			}
+			
+			const handleAttachmentSuccess = (val) => {
+				ElMessage.success('上传成功')
+				state.Form.attachmentFileList.push({name: val.data.src, url: val.data.src})
+				if (state.Form.attachment) {
+					state.Form.attachment = state.Form.attachment + ',' + val.data.id
+				} else {
+					state.Form.attachment = val.data.id
+				}
+			}
+
+			const handleAttachmentRemove = (val) => {
+				attachmentRef.value.clearFiles()
+				state.Form.attachment = ''
+				state.Form.attachmentFileList.attachment = []
+			}
 
 			return {
 				...toRefs(state),
 				editor,
+				attachmentRef,
 				uploadRef,
 				Ref,
 				submitAdd,
@@ -298,7 +329,9 @@
 				handleBeforeUpload,
 				handleUrlSuccess,
 				handleUrlError,
-				handleRemove
+				handleRemove,
+				handleAttachmentSuccess,
+				handleAttachmentRemove,
 			}
 		}
 	}

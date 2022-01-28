@@ -5,7 +5,7 @@
 		</template>
 
 		<div style="display: flex; justify-content: center;"><strong v-html="data.title"></strong></div>
-		<div style="display: flex; justify-content: center; font-size: 12px; color: #5B5B5B;">
+		<div style="display: flex; justify-content: center; font-size: 12px; color: #5B5B5B; margin-top: 10px;">
 			发布时间：<span v-html="data.release_time"></span>
 			<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
 			访问次数：<span v-html="data.num"></span>
