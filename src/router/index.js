@@ -140,6 +140,33 @@ const router = createRouter({
 		path: '/news-preview',
 		name: 'news_preview',
 		component: () => import('../views/news/preview.vue'),
+	},
+	// 科室设置
+	{
+		path: '/technicaloffice',
+		name: 'technicaloffice',
+		component: () => import('../views/technicaloffice/setting/index.vue'),
+	},
+	{
+		path: '/technicaloffice-add',
+		name: 'technicaloffice_add',
+		component: () => import('../views/technicaloffice/setting/add.vue'),
+	},
+	// 科室介绍
+	{
+		path: '/technicaloffice-introduce',
+		name: 'technicaloffice_introduce',
+		component: () => import('../views/technicaloffice/introduce/index.vue'),
+	},
+	{
+		path: '/technicaloffice-introduce-add',
+		name: 'technicaloffice_introduce_add',
+		component: () => import('../views/technicaloffice/introduce/add.vue'),
+	},
+	{
+		path: '/technicaloffice-introduce-preview',
+		name: 'technicaloffice_introduce_preivew',
+		component: () => import('../views/technicaloffice/introduce/preview.vue'),
 	}
 	
 	

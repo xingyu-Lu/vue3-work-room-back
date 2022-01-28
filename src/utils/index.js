@@ -65,6 +65,14 @@ export const pathMap = {
 	news: '新闻公告',
 	news_add: '新闻公告',
 	news_preview: '新闻预览',
+	
+	// 科室设置
+	technicaloffice: '科室设置',
+	technicaloffice_add: '科室设置',
+	
+	// 科室介绍
+	technicaloffice_introduce: '科室介绍',
+	technicaloffice_introduce_add: '科室介绍',
 
 
 	// 医院概况

@@ -1,26 +1,12 @@
 <template>
 	<el-card style="min-height: 100%;">
 		<template #header>
-			<el-button type="primary" :icon="Plus" @click="handleAdd">新增</el-button>
+				<el-button type="primary" :icon="Plus" @click="handleAdd">新增</el-button>
 		</template>
-
+	
 		<el-table v-loading="loading" :data="tableData" stripe style="width: 100%">
 			<el-table-column prop="id" label="id" />
-			<el-table-column label="图片">
-				<template #default="scope">
-					<el-image :key="scope.row.id" :src="scope.row.url" :lazy="true" :initial-index="1">
-					</el-image>
-				</template>
-			</el-table-column>
-			<el-table-column prop="type" label="类型">
-				<template #default="scope">
-					<span v-if="scope.row.type == 0">医院新闻</span>
-					<span v-if="scope.row.type == 1">医院公告</span>
-					<span v-if="scope.row.type == 2">视频新闻</span>
-				</template>
-			</el-table-column>
-			<el-table-column prop="title" label="标题" />
-			<el-table-column prop="release_time" label="发布时间" />
+			<el-table-column prop="office_name" label="科室名称" />
 			<el-table-column prop="status" label="状态">
 				<template #default="scope">
 					<span style="color: green;" v-if="scope.row.status == 1">已审核</span>
@@ -28,7 +14,7 @@
 				</template>
 			</el-table-column>
 			<el-table-column prop="created_at" label="创建时间" />
-		
+			
 			<el-table-column label="操作" width="200">
 				<template #default="scope">
 					<a style="cursor: pointer; margin-right: 10px" @click="handlePreview(scope.row.id)">预览</a>
@@ -63,32 +49,30 @@
 		useRouter,
 		useRoute
 	} from 'vue-router'
-
+	
 	export default {
-		name: 'rotate_list',
+		name: 'technicaloffice_introduce_index',
 		setup() {
 			const router = useRouter()
 			const state = reactive({
 				loading: false,
 				tableData: [], // 数据列表
-				srcList: [],
 				total: 0, // 总条数
 				currentPage: 1, // 当前页
 				pageSize: 10 // 分页大小
 			})
 			onMounted(() => {
-				getNewsList()
-				// getSrcList()
+				getOfficeIntroduceList()
 			})
-			// 获取轮播图列表
-			const getNewsList = () => {
+			
+			const getOfficeIntroduceList = () => {
 				state.loading = true
-				axios.get('/api/back/news', {
+				axios.get('/api/back/technicalOfficeIntroduces', {
 					params: {
 						page: state.currentPage,
 						page_size: state.pageSize
 					}
-				}).then(res => {					
+				}).then(res => {
 					state.tableData = res.data
 					state.pageSize = res.pagination.perPage
 					state.total = res.pagination.total
@@ -96,27 +80,21 @@
 					state.loading = false
 				})
 			}
-			// 获取src图片做预览
-			const getSrcList = () => {
-				axios.get('/api/back/news/srclist').then(res => {
-					state.srcList = res.data
-				})
-			}
 			
 			const changePage = (val) => {
 				state.currentPage = val
-				getNewsList()
+				getOfficeIntroduceList()
 			}
-
+			
 			const handleAdd = () => {
 				router.push({
-					path: '/news-add'
+					path: '/technicaloffice-introduce-add'
 				})
 			}
 			
 			const handleEdit = (id) => {
 				router.push({
-					path: '/news-add',
+					path: '/technicaloffice-introduce-add',
 					query: {
 						id
 					}
@@ -125,30 +103,30 @@
 			
 			const handlePreview = (id) => {
 				router.push({
-					path: '/news-preview',
+					path: '/technicaloffice-introduce-preview',
 					query: {
 						id
 					}
 				})
 			}
-
+			
 			const handleStatus = (id, status) => {
-				axios.put('/api/back/news/status', {
+				axios.put('/api/back/technicalOfficeIntroduces/status', {
 					id: id,
 					status: status
 				}).then(() => {
 					ElMessage.success('修改成功')
-					getNewsList()
+					getOfficeIntroduceList()
 				})
 			}
-
+			
 			return {
 				...toRefs(state),
 				changePage,
 				handleAdd,
 				handleEdit,
-				handleStatus,
 				handlePreview,
+				handleStatus,
 				Plus,
 			}
 		}
