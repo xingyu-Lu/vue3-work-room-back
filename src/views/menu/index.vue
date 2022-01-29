@@ -12,8 +12,8 @@
 			<el-table-column prop="status" label="状态">
 				<template #default="scope">
 					<!-- <el-switch :v-model="scope.row.status == 1 ? ture : false" active-value="1" inactive-value="0" /> -->
-					<span style="color: green;" v-if="scope.row.is_enabled == 1">启用中</span>
-					<span style="color: red;" v-else>禁用</span>
+					<span style="color: #67C23A;" v-if="scope.row.is_enabled == 1">启用中</span>
+					<span style="color: #E6A23C;" v-else>禁用</span>
 				</template>
 			</el-table-column>
 			<el-table-column prop="sort" label="排序" />

@@ -1,32 +1,42 @@
 <template>
 	<el-card style="min-height: 100%;">
 		<template #header>
-			<!-- <div class="header"> -->
-				<el-button type="primary" :icon="Plus" @click="handleAdd">新增管理员</el-button>
-			<!-- </div> -->
+			<el-button type="primary" :icon="Plus" @click="handleAdd">新增</el-button>
 		</template>
 
 		<el-table v-loading="loading" :data="tableData" stripe style="width: 100%">
 			<el-table-column prop="id" label="id" />
-			<el-table-column prop="name" label="账号" />
+			<el-table-column prop="office_name" label="科室名称" />
+			<el-table-column prop="name" label="医生名字" />
+			<el-table-column label="图片">
+				<template #default="scope">
+					<el-image :key="scope.row.id" :src="scope.row.url" :lazy=true :initial-index="1">
+					</el-image>
+				</template>
+			</el-table-column>
+			<el-table-column prop="professional" label="职称" />
+			<el-table-column prop="excel" label="擅长" />
+			<el-table-column prop="sort" label="排序" />
 			<el-table-column prop="status" label="状态">
 				<template #default="scope">
-					<!-- <el-switch :v-model="scope.row.status == 1 ? ture : false" active-value="1" inactive-value="0" /> -->
-					<span style="color: #67C23A;" v-if="scope.row.status == 1">启用中</span>
-					<span style="color: #E6A23C;" v-else>禁用</span>
+					<span style="color: #67C23A;" v-if="scope.row.status == 1">已审核</span>
+					<span style="color: #E6A23C;" v-else-if="scope.row.status == 0">待审核</span>
+					<span style="color: #F56C6C;" v-else>已删除</span>
 				</template>
 			</el-table-column>
 			<el-table-column prop="created_at" label="创建时间" />
-			<el-table-column label="操作" width="100">
+		
+			<el-table-column label="操作" width="200">
 				<template #default="scope">
-					<a style="cursor: pointer; margin-right: 10px" @click="handleEdit(scope.row.id)">修改</a>
+					<a style="cursor: pointer; margin-right: 10px" v-if="scope.row.status != 2" @click="handleEdit(scope.row.id)">修改</a>
+					<a style="cursor: pointer; margin-right: 10px" v-if="scope.row.status != 2" @click="handleStatus(scope.row.id, 2)">删除</a>
 					<a style="cursor: pointer; margin-right: 10px" v-if="scope.row.status == 1"
-						@click="handleStatus(scope.row.id, 0)">禁用</a>
-					<a style="cursor: pointer; margin-right: 10px" v-else @click="handleStatus(scope.row.id, 1)">启用</a>
+						@click="handleStatus(scope.row.id, 0)">撤销审核</a>
+					<a style="cursor: pointer; margin-right: 10px" v-else-if="scope.row.status == 0" @click="handleStatus(scope.row.id, 1)">审核</a>
 				</template>
 			</el-table-column>
 		</el-table>
-
+		
 		<el-pagination background layout="prev, pager, next" :total="total" :page-size="pageSize"
 			:current-page="currentPage" @current-change="changePage" />
 	</el-card>
@@ -52,31 +62,27 @@
 	} from 'vue-router'
 
 	export default {
-		name: 'admin-list',
+		name: 'dynamin_index',
 		setup() {
-			const value1 = ref(true)
-			const multipleTable = ref(null)
 			const router = useRouter()
 			const state = reactive({
 				loading: false,
 				tableData: [], // 数据列表
-				multipleSelection: [], // 选中项
 				total: 0, // 总条数
 				currentPage: 1, // 当前页
 				pageSize: 10 // 分页大小
 			})
 			onMounted(() => {
-				getAdminList()
+				getDynamicsList()
 			})
-			// 获取admin列表
-			const getAdminList = () => {
+			const getDynamicsList = () => {
 				state.loading = true
-				axios.get('/api/back/admins', {
+				axios.get('/api/back/technicalOfficeDoctors', {
 					params: {
 						page: state.currentPage,
 						page_size: state.pageSize
 					}
-				}).then(res => {
+				}).then(res => {					
 					state.tableData = res.data
 					state.pageSize = res.pagination.perPage
 					state.total = res.pagination.total
@@ -84,21 +90,21 @@
 					state.loading = false
 				})
 			}
-
+			
 			const changePage = (val) => {
 				state.currentPage = val
-				getAdminList()
+				getNewsList()
 			}
 
 			const handleAdd = () => {
 				router.push({
-					path: '/admin-add'
+					path: '/technicaloffice-doctor-add'
 				})
 			}
-
+			
 			const handleEdit = (id) => {
 				router.push({
-					path: '/admin-add',
+					path: '/technicaloffice-doctor-add',
 					query: {
 						id
 					}
@@ -106,18 +112,17 @@
 			}
 
 			const handleStatus = (id, status) => {
-				axios.put('/api/back/admins/status', {
+				axios.put('/api/back/technicalOfficeDoctors/status', {
 					id: id,
 					status: status
 				}).then(() => {
 					ElMessage.success('修改成功')
-					getAdminList()
+					getDynamicsList()
 				})
 			}
 
 			return {
 				...toRefs(state),
-				multipleTable,
 				changePage,
 				handleAdd,
 				handleEdit,

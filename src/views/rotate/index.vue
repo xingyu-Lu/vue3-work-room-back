@@ -16,8 +16,8 @@
 			</el-table-column>
 			<el-table-column prop="status" label="状态">
 				<template #default="scope">
-					<span style="color: green;" v-if="scope.row.status == 1">启用中</span>
-					<span style="color: red;" v-else>禁用</span>
+					<span style="color: #67C23A;" v-if="scope.row.status == 1">启用中</span>
+					<span style="color: #E6A23C;" v-else>禁用</span>
 				</template>
 			</el-table-column>
 			<el-table-column prop="sort" label="排序" />

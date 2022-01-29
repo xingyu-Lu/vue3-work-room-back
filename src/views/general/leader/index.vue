@@ -18,8 +18,9 @@
 			<el-table-column prop="professional" label="职称" />
 			<el-table-column prop="status" label="状态">
 				<template #default="scope">
-					<span style="color: green;" v-if="scope.row.status == 1">已审核</span>
-					<span style="color: red;" v-else>待审核</span>
+					<span style="color: #67C23A;" v-if="scope.row.status == 1">已审核</span>
+					<span style="color: #E6A23C;" v-else-if="scope.row.status == 0">待审核</span>
+					<span style="color: #F56C6C;" v-else>已删除</span>
 				</template>
 			</el-table-column>
 			<el-table-column prop="sort" label="排序" />
@@ -27,10 +28,11 @@
 		
 			<el-table-column label="操作" width="200">
 				<template #default="scope">
-					<a style="cursor: pointer; margin-right: 10px" @click="handleEdit(scope.row.id)">修改</a>
+					<a style="cursor: pointer; margin-right: 10px" v-if="scope.row.status != 2" @click="handleEdit(scope.row.id)">修改</a>
+					<a style="cursor: pointer; margin-right: 10px" v-if="scope.row.status != 2" @click="handleStatus(scope.row.id, 2)">删除</a>
 					<a style="cursor: pointer; margin-right: 10px" v-if="scope.row.status == 1"
 						@click="handleStatus(scope.row.id, 0)">撤销审核</a>
-					<a style="cursor: pointer; margin-right: 10px" v-else @click="handleStatus(scope.row.id, 1)">审核</a>
+					<a style="cursor: pointer; margin-right: 10px" v-else-if="scope.row.status == 0" @click="handleStatus(scope.row.id, 1)">审核</a>
 				</template>
 			</el-table-column>
 		</el-table>

@@ -165,8 +165,35 @@ const router = createRouter({
 	},
 	{
 		path: '/technicaloffice-introduce-preview',
-		name: 'technicaloffice_introduce_preivew',
+		name: 'technicaloffice_introduce_preview',
 		component: () => import('../views/technicaloffice/introduce/preview.vue'),
+	},
+	// 科室动态
+	{
+		path: '/technicaloffice-dynamic',
+		name: 'technicaloffice_dynamic',
+		component: () => import('../views/technicaloffice/dynamic/index.vue'),
+	},
+	{
+		path: '/technicaloffice-dynamic-add',
+		name: 'technicaloffice_dynamic_add',
+		component: () => import('../views/technicaloffice/dynamic/add.vue'),
+	},
+	{
+		path: '/technicaloffice-dynamic-preview',
+		name: 'technicaloffice_dynamic_preview',
+		component: () => import('../views/technicaloffice/dynamic/preview.vue'),
+	},
+	// 科室医生
+	{
+		path: '/technicaloffice-doctor',
+		name: 'technicaloffice_doctor',
+		component: () => import('../views/technicaloffice/doctor/index.vue'),
+	},
+	{
+		path: '/technicaloffice-doctor-add',
+		name: 'technicaloffice_doctor_add',
+		component: () => import('../views/technicaloffice/doctor/add.vue'),
 	}
 	
 	

@@ -6,8 +6,8 @@
 			<el-button v-if="data.status == 0 && flag" type="primary" :icon="Check" @click="handleCheck(data.id)">审核</el-button>
 			<div style="margin-top: 20px; margin-bottom: 20px;" v-if="flag">
 				<span>状态：</span>
-				<span style="color: green;" v-if="data.status == 1">已审核</span>
-				<span style="color: red;" v-else>待审核</span>
+				<span style="color: #67C23A;" v-if="data.status == 1">已审核</span>
+				<span style="color: #E6A23C;" v-else>待审核</span>
 			</div>
 		</template>
 		<div v-html="data.content">

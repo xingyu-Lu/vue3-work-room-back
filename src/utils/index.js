@@ -73,6 +73,16 @@ export const pathMap = {
 	// 科室介绍
 	technicaloffice_introduce: '科室介绍',
 	technicaloffice_introduce_add: '科室介绍',
+	technicaloffice_introduce_preview: '科室介绍预览',
+	
+	// 科室动态
+	technicaloffice_dynamic: '科室动态',
+	technicaloffice_dynamic_add: '科室动态',
+	technicaloffice_dynamic_preview: '科室动态预览',
+	
+	// 科室医生
+	technicaloffice_doctor: '科室医生',
+	technicaloffice_doctor_add: '科室医生',
 
 
 	// 医院概况
