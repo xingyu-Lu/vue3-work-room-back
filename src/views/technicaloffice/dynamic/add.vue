@@ -107,7 +107,7 @@
 				Form: {
 					img_url: '',
 					img: '',
-					office_id: '0',
+					office_id: '',
 					title: '',
 					content: '',
 					release_time: ref(''),

@@ -66,7 +66,7 @@
 				select_flag: false,
 				id: id,
 				Form: {
-					office_id: '0',
+					office_id: '',
 					status: '0',
 					list: [],
 				},
