@@ -83,6 +83,24 @@ export const pathMap = {
 	// 科室医生
 	technicaloffice_doctor: '科室医生',
 	technicaloffice_doctor_add: '科室医生',
+	
+	// 科室门诊
+	technicaloffice_outpatient: '科室门诊',
+	technicaloffice_outpatient_add: '科室门诊',
+	
+	// 科室特色医疗
+	technicaloffice_feature: '科室特色医疗',
+	technicaloffice_feature_add: '科室特色医疗',
+	technicaloffice_feature_preview: '科室特色医疗',
+	
+	// 科室图片
+	technicaloffice_pic: '科室图片',
+	technicaloffice_pic_add: '科室图片',
+	
+	// 科室健康科普
+	technicaloffice_healthscience: '科室健康科普',
+	technicaloffice_healthscience_add: '科室健康科普',
+	technicaloffice_healthscience_preview: '科室健康科普预览',
 
 
 	// 医院概况

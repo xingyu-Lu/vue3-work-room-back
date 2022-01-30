@@ -194,7 +194,61 @@ const router = createRouter({
 		path: '/technicaloffice-doctor-add',
 		name: 'technicaloffice_doctor_add',
 		component: () => import('../views/technicaloffice/doctor/add.vue'),
-	}
+	},
+	// 科室门诊
+	{
+		path: '/technicaloffice-outpatient',
+		name: 'technicaloffice_outpatient',
+		component: () => import('../views/technicaloffice/outpatient/index.vue'),
+	},
+	{
+		path: '/technicaloffice-outpatient-add',
+		name: 'technicaloffice_outpatient_add',
+		component: () => import('../views/technicaloffice/outpatient/add.vue'),
+	},
+	// 科室特色医疗
+	{
+		path: '/technicaloffice-feature',
+		name: 'technicaloffice_feature',
+		component: () => import('../views/technicaloffice/feature/index.vue'),
+	},
+	{
+		path: '/technicaloffice-feature-add',
+		name: 'technicaloffice_feature_add',
+		component: () => import('../views/technicaloffice/feature/add.vue'),
+	},
+	{
+		path: '/technicaloffice-feature-preview',
+		name: 'technicaloffice_feature_preview',
+		component: () => import('../views/technicaloffice/feature/preview.vue'),
+	},
+	// 科室图片
+	{
+		path: '/technicaloffice-pic',
+		name: 'technicaloffice_pic',
+		component: () => import('../views/technicaloffice/pic/index.vue'),
+	},
+	{
+		path: '/technicaloffice-pic-add',
+		name: 'technicaloffice_pic_add',
+		component: () => import('../views/technicaloffice/pic/add.vue'),
+	},
+	// 科室健康科普
+	{
+		path: '/technicaloffice-healthscience',
+		name: 'technicaloffice_healthscience',
+		component: () => import('../views/technicaloffice/healthscience/index.vue'),
+	},
+	{
+		path: '/technicaloffice-healthscience-add',
+		name: 'technicaloffice_healthscience_add',
+		component: () => import('../views/technicaloffice/healthscience/add.vue'),
+	},
+	{
+		path: '/technicaloffice-healthscience-preview',
+		name: 'technicaloffice_healthscience_preview',
+		component: () => import('../views/technicaloffice/healthscience/preview.vue'),
+	},
 	
 	
 	

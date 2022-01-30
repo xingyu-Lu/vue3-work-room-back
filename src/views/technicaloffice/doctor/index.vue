@@ -2,6 +2,10 @@
 	<el-card style="min-height: 100%;">
 		<template #header>
 			<el-button type="primary" :icon="Plus" @click="handleAdd">新增</el-button>
+			<div>
+				<el-input style="width: 200px; margin-top: 20px; margin-right: 10px;" placeholder="请输入科室名称" v-model="office_name" clearable />
+				<el-button type="primary" @click="handleOption">搜索</el-button>
+			</div>
 		</template>
 
 		<el-table v-loading="loading" :data="tableData" stripe style="width: 100%">
@@ -66,6 +70,7 @@
 		setup() {
 			const router = useRouter()
 			const state = reactive({
+				office_name: '',
 				loading: false,
 				tableData: [], // 数据列表
 				total: 0, // 总条数
@@ -80,7 +85,8 @@
 				axios.get('/api/back/technicalOfficeDoctors', {
 					params: {
 						page: state.currentPage,
-						page_size: state.pageSize
+						page_size: state.pageSize,
+						office_name: state.office_name,
 					}
 				}).then(res => {					
 					state.tableData = res.data
@@ -91,9 +97,14 @@
 				})
 			}
 			
+			const handleOption = () => {
+				state.currentPage = 1
+				getDynamicsList()
+			}
+			
 			const changePage = (val) => {
 				state.currentPage = val
-				getNewsList()
+				getDynamicsList()
 			}
 
 			const handleAdd = () => {
@@ -123,6 +134,7 @@
 
 			return {
 				...toRefs(state),
+				handleOption,
 				changePage,
 				handleAdd,
 				handleEdit,
