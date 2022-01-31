@@ -125,7 +125,7 @@
 </style>
 <style>
 	.popper-user-box {
-		background: url('https://s.yezgea02.com/lingling-h5/static/account-banner-bg.png') 50% 50% no-repeat !important;
+		background: url(../assets/account-banner-bg.png) 50% 50% no-repeat !important;
 		background-size: cover !important;
 		border-radius: 0 !important;
 	}

@@ -3,7 +3,15 @@
 		<template #header>
 			<el-button type="primary" :icon="Plus" @click="handleAdd">新增</el-button>
 			<div>
-				<el-input style="width: 200px; margin-top: 20px; margin-right: 10px;" placeholder="请输入科室名称" v-model="title" clearable />
+				<el-select v-model="type" placeholder="Select" filterable>
+					<el-option value="0" label="党务管理"></el-option>
+					<el-option value="1" label="党员教育"></el-option>
+					<el-option value="2" label="党风廉政"></el-option>
+					<el-option value="3" label="职工之家"></el-option>
+					<el-option value="4" label="医德医风"></el-option>
+					<el-option value="5" label="青年加油站"></el-option>
+				</el-select>
+				<el-input style="width: 200px; margin-top: 20px; margin-right: 10px; margin-left: 10px;" placeholder="请输入科室名称" v-model="title" clearable />
 				<el-button type="primary" @click="handleOption">搜索</el-button>
 			</div>
 		</template>
@@ -19,9 +27,12 @@
 			</el-table-column>
 			<el-table-column prop="type" label="类型">
 				<template #default="scope">
-					<span v-if="scope.row.type == 0">医院新闻</span>
-					<span v-if="scope.row.type == 1">医院公告</span>
-					<span v-if="scope.row.type == 2">视频新闻</span>
+					<span v-if="scope.row.type == 0">党务管理</span>
+					<span v-if="scope.row.type == 1">党员教育</span>
+					<span v-if="scope.row.type == 2">党风廉政</span>
+					<span v-if="scope.row.type == 3">职工之家</span>
+					<span v-if="scope.row.type == 4">医德医风</span>
+					<span v-if="scope.row.type == 5">青年加油站</span>
 				</template>
 			</el-table-column>
 			<el-table-column prop="title" label="标题" />
@@ -77,6 +88,7 @@
 		setup() {
 			const router = useRouter()
 			const state = reactive({
+				type: '0',
 				title: '',
 				loading: false,
 				tableData: [], // 数据列表
@@ -92,11 +104,12 @@
 			// 获取轮播图列表
 			const getNewsList = () => {
 				state.loading = true
-				axios.get('/api/back/news', {
+				axios.get('/api/back/partys', {
 					params: {
 						page: state.currentPage,
 						page_size: state.pageSize,
 						title: state.title,
+						type: state.type,
 					}
 				}).then(res => {					
 					state.tableData = res.data
@@ -125,13 +138,13 @@
 
 			const handleAdd = () => {
 				router.push({
-					path: '/news-add'
+					path: '/party-add'
 				})
 			}
 			
 			const handleEdit = (id) => {
 				router.push({
-					path: '/news-add',
+					path: '/party-add',
 					query: {
 						id
 					}
@@ -140,7 +153,7 @@
 			
 			const handlePreview = (id) => {
 				router.push({
-					path: '/news-preview',
+					path: '/party-preview',
 					query: {
 						id
 					}
@@ -148,7 +161,7 @@
 			}
 
 			const handleStatus = (id, status) => {
-				axios.put('/api/back/news/status', {
+				axios.put('/api/back/partys/status', {
 					id: id,
 					status: status
 				}).then(() => {

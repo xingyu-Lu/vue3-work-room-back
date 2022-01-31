@@ -1,32 +1,25 @@
 <template>
 	<el-card style="min-height: 100%;">
 		<template #header>
-			<el-button type="primary" :icon="Plus" @click="handleAdd">新增</el-button>
+			<!-- <el-button type="primary" :icon="Plus" @click="handleAdd">新增</el-button> -->
 			<div>
-				<el-input style="width: 200px; margin-top: 20px; margin-right: 10px;" placeholder="请输入科室名称" v-model="title" clearable />
+				<el-input style="width: 200px; margin-top: 20px; margin-right: 10px; margin-left: 10px;" placeholder="请输入员工名字" v-model="staff_name" clearable />
+				<el-input style="width: 200px; margin-top: 20px; margin-right: 10px; margin-left: 10px;" placeholder="请输入标题" v-model="title" clearable />
 				<el-button type="primary" @click="handleOption">搜索</el-button>
 			</div>
 		</template>
 
 		<el-table v-loading="loading" :data="tableData" stripe style="width: 100%">
 			<el-table-column prop="id" label="id" />
-			<el-table-column label="图片">
-				<template #default="scope">
-					<el-image v-if="scope.row.url" :key="scope.row.id" :src="scope.row.url" :lazy="true" :initial-index="1">
-					</el-image>
-					<span v-else>无</span>
-				</template>
-			</el-table-column>
-			<el-table-column prop="type" label="类型">
-				<template #default="scope">
-					<span v-if="scope.row.type == 0">医院新闻</span>
-					<span v-if="scope.row.type == 1">医院公告</span>
-					<span v-if="scope.row.type == 2">视频新闻</span>
-				</template>
-			</el-table-column>
 			<el-table-column prop="title" label="标题" />
 			<el-table-column prop="release_time" label="发布时间" />
 			<el-table-column prop="num" label="浏览次数" />
+			<el-table-column prop="type" label="类型">
+				<template #default="scope">
+					<span v-if="scope.row.type == 0">招聘信息</span>
+					<span v-if="scope.row.type == 1">应聘流程</span>
+				</template>
+			</el-table-column>
 			<el-table-column prop="status" label="状态">
 				<template #default="scope">
 					<span style="color: #67C23A;" v-if="scope.row.status == 1">已审核</span>
@@ -39,7 +32,7 @@
 			<el-table-column label="操作" width="200">
 				<template #default="scope">
 					<a style="cursor: pointer; margin-right: 10px" @click="handlePreview(scope.row.id)">预览</a>
-					<a style="cursor: pointer; margin-right: 10px" v-if="scope.row.status != 2" @click="handleEdit(scope.row.id)">修改</a>
+					<!-- <a style="cursor: pointer; margin-right: 10px" v-if="scope.row.status != 2" @click="handleEdit(scope.row.id)">修改</a> -->
 					<a style="cursor: pointer; margin-right: 10px" v-if="scope.row.status != 2" @click="handleStatus(scope.row.id, 2)">删除</a>
 					<a style="cursor: pointer; margin-right: 10px" v-if="scope.row.status == 1"
 						@click="handleStatus(scope.row.id, 0)">撤销审核</a>
@@ -73,30 +66,30 @@
 	} from 'vue-router'
 
 	export default {
-		name: 'rotate_list',
+		name: 'dynamin_index',
 		setup() {
 			const router = useRouter()
 			const state = reactive({
+				staff_name: '',
 				title: '',
 				loading: false,
 				tableData: [], // 数据列表
-				srcList: [],
 				total: 0, // 总条数
 				currentPage: 1, // 当前页
 				pageSize: 10 // 分页大小
 			})
 			onMounted(() => {
-				getNewsList()
+				getDynamicsList()
 				// getSrcList()
 			})
-			// 获取轮播图列表
-			const getNewsList = () => {
+			const getDynamicsList = () => {
 				state.loading = true
-				axios.get('/api/back/news', {
+				axios.get('/api/back/voiceEmployees', {
 					params: {
 						page: state.currentPage,
 						page_size: state.pageSize,
 						title: state.title,
+						staff_name: state.staff_name,
 					}
 				}).then(res => {					
 					state.tableData = res.data
@@ -115,23 +108,23 @@
 			
 			const handleOption = () => {
 				state.currentPage = 1
-				getNewsList()
+				getDynamicsList()
 			}
 			
 			const changePage = (val) => {
 				state.currentPage = val
-				getNewsList()
+				getDynamicsList()
 			}
 
 			const handleAdd = () => {
 				router.push({
-					path: '/news-add'
+					path: '/voiceemployee-add'
 				})
 			}
 			
 			const handleEdit = (id) => {
 				router.push({
-					path: '/news-add',
+					path: '/voiceemployee-add',
 					query: {
 						id
 					}
@@ -140,7 +133,7 @@
 			
 			const handlePreview = (id) => {
 				router.push({
-					path: '/news-preview',
+					path: '/voiceemployee-preview',
 					query: {
 						id
 					}
@@ -148,12 +141,12 @@
 			}
 
 			const handleStatus = (id, status) => {
-				axios.put('/api/back/news/status', {
+				axios.put('/api/back/voiceEmployees/status', {
 					id: id,
 					status: status
 				}).then(() => {
 					ElMessage.success('修改成功')
-					getNewsList()
+					getDynamicsList()
 				})
 			}
 
@@ -161,8 +154,8 @@
 				...toRefs(state),
 				handleOption,
 				changePage,
-				handleAdd,
-				handleEdit,
+				// handleAdd,
+				// handleEdit,
 				handleStatus,
 				handlePreview,
 				Plus,

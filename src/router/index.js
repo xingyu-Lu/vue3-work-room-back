@@ -249,6 +249,92 @@ const router = createRouter({
 		name: 'technicaloffice_healthscience_preview',
 		component: () => import('../views/technicaloffice/healthscience/preview.vue'),
 	},
+	// 专家介绍
+	{
+		path: '/expert',
+		name: 'expert',
+		component: () => import('../views/expert/index.vue'),
+	},
+	{
+		path: '/expert-add',
+		name: 'expert_add',
+		component: () => import('../views/expert/add.vue'),
+	},
+	// 科研动态
+	{
+	  path: '/scientific',
+	  name: 'scientific',
+	  component: () => import('../views/scientific/index.vue'),
+	},
+	{
+		path: '/scientific-add',
+		name: 'scientific_add',
+		component: () => import('../views/scientific/add.vue'),
+	},
+	{
+		path: '/scientific-preview',
+		name: 'scientific_preview',
+		component: () => import('../views/scientific/preview.vue'),
+	},
+	// 患者服务
+	{
+	  path: '/patient',
+	  name: 'patient',
+	  component: () => import('../views/patient/index.vue'),
+	},
+	{
+		path: '/patient-add',
+		name: 'patient_add',
+		component: () => import('../views/patient/add.vue'),
+	},
+	{
+		path: '/patient-preview',
+		name: 'patient_preview',
+		component: () => import('../views/patient/preview.vue'),
+	},
+	// 党建
+	{
+	  path: '/party',
+	  name: 'party',
+	  component: () => import('../views/party/index.vue'),
+	},
+	{
+		path: '/party-add',
+		name: 'party_add',
+		component: () => import('../views/party/add.vue'),
+	},
+	{
+		path: '/party-preview',
+		name: 'party_preview',
+		component: () => import('../views/party/preview.vue'),
+	},
+	// 招聘
+	{
+	  path: '/job',
+	  name: 'job',
+	  component: () => import('../views/job/index.vue'),
+	},
+	{
+		path: '/job-add',
+		name: 'job_add',
+		component: () => import('../views/job/add.vue'),
+	},
+	{
+		path: '/job-preview',
+		name: 'job_preview',
+		component: () => import('../views/job/preview.vue'),
+	},
+	// 员工之声
+	{
+	  path: '/voiceemployee',
+	  name: 'voiceemployee',
+	  component: () => import('../views/voiceemployee/index.vue'),
+	},
+	{
+		path: '/voiceemployee-preview',
+		name: 'voiceemployee_preview',
+		component: () => import('../views/voiceemployee/preview.vue'),
+	},
 	
 	
 	

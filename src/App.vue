@@ -11,7 +11,7 @@
 					</div>
 					<div class="line" />
 					<el-menu :default-openeds="state.defaultOpen" background-color="#222832" text-color="#fff"
-						:router="true" :default-active='state.currentPath'>
+						:router="true" :default-active='state.currentPath' :unique-opened="true">
 						
 						<el-sub-menu :index="(index+'')" v-for="(item, index) in state.menuList" :key="index">
 							<template #title>

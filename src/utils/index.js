@@ -101,62 +101,34 @@ export const pathMap = {
 	technicaloffice_healthscience: '科室健康科普',
 	technicaloffice_healthscience_add: '科室健康科普',
 	technicaloffice_healthscience_preview: '科室健康科普预览',
-
-
-	// 医院概况
-	yyjj: '医院简介',
-	ldtd: '领导团队',
-	yywh: '医院文化',
-	lsyg: '历史沿革',
-	zzjg: '组织机构',
-	yyry: '医院荣誉',
-	wlzw: '未来展望',
-	// 新闻动态
-	yyxw: '医院新闻',
-	spxw: '视频新闻',
-	yygg: '医院公告',
-	// 科室介绍
-	ksjs: '科室介绍',
+	
 	// 专家介绍
-	zjjs: '专家介绍',
-	czxx: '出诊信息',
-	// 科研教学
-	kyjx: '科研动态',
+	expert: '专家介绍',
+	expert_add: '专家介绍',
+	
+	// 科研动态
+	scientific: '科研动态',
+	scientific_add: '科研动态',
+	scientific_preview: '科研动态',
+	
 	// 患者服务
-	mzlc: '门诊流程',
-	zylc: '住院流程',
-	czxx: '出诊信息',
-	jcxz: '检查须知',
-	jcxz_detail: '检查须知',
-	jktj: '健康体检',
-	jktj_detail: '健康体检',
-	ybzn: '医保指南',
-	ybzn_detail: '医保指南',
-	azb: '艾滋病',
-	lyfb: '楼宇分布',
-	lxwm: '联系我们',
-	hlyd: '护理园地',
-	hlyd_detail: '护理园地',
-	jkcj: '健康促进',
-	jkcj_detail: '健康促进',
-	// 党建之窗
-	dwgl: '党务管理',
-	dwgl_detail: '党务管理',
-	dyjy: '党员教育',
-	dyjy_detail: '党员教育',
-	dflz: '党风廉政',
-	dflz_detail: '党风廉政',
-	ygzj: '员工之家',
-	ygzj_detail: '员工之家',
-	ydyf_detail: '医德医风',
-	qnjyz: '青年加油站',
-	qnjyz_detail: '青年加油站',
-	// 人才招聘
-	zpxx: '招聘信息',
-	zpxx_detail: '招聘信息',
-	yplc: '应聘流程',
-	update_log: '更新记录',
-
+	patient: '患者服务',
+	patient_add: '患者服务',
+	patient_preview: '患者服务预览',
+	
+	// 党建
+	party: '党建',
+	party_add: '党建',
+	party_preview: '党建预览',
+	
+	// 招聘
+	job: '招聘',
+	job_add: '招聘',
+	job_preview: '招聘预览',
+	
+	// 员工之声
+	voiceemployee: '员工之声',
+	voiceemployee_preview: '员工之声',
 
 	api_test: 'api 测试',
 	good: '商品列表',
