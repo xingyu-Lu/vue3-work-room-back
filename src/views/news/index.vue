@@ -3,7 +3,12 @@
 		<template #header>
 			<el-button type="primary" :icon="Plus" @click="handleAdd">新增</el-button>
 			<div>
-				<el-input style="width: 200px; margin-top: 20px; margin-right: 10px;" placeholder="请输入科室名称" v-model="title" clearable />
+				<el-select v-model="type" placeholder="Select" filterable>
+					<el-option value="0" label="医院新闻"></el-option>
+					<el-option value="1" label="医院公告"></el-option>
+					<el-option value="2" label="视频新闻"></el-option>
+				</el-select>
+				<el-input style="width: 200px; margin-top: 20px; margin-right: 10px; margin-left: 10px;" placeholder="请输入科室名称" v-model="title" clearable />
 				<el-button type="primary" @click="handleOption">搜索</el-button>
 			</div>
 		</template>
@@ -77,6 +82,7 @@
 		setup() {
 			const router = useRouter()
 			const state = reactive({
+				type: '0',
 				title: '',
 				loading: false,
 				tableData: [], // 数据列表
@@ -97,6 +103,7 @@
 						page: state.currentPage,
 						page_size: state.pageSize,
 						title: state.title,
+						type: state.type,
 					}
 				}).then(res => {					
 					state.tableData = res.data

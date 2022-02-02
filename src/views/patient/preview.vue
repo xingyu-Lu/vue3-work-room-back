@@ -10,7 +10,7 @@
 			<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
 			访问次数：<span v-html="data.num"></span>
 		</div>
-		<div v-html="data.content"></div>
+		<span v-html="data.content"></span>
 	</el-card>
 </template>
 
@@ -74,5 +74,19 @@
 	}
 </script>
 
-<style>
+<style scoped>
+	/deep/ table {
+	  border-top: 1px solid #ccc;
+	  border-left: 1px solid #ccc;
+	}
+	/deep/ table td,
+	/deep/ table th {
+	  border-bottom: 1px solid #ccc;
+	  border-right: 1px solid #ccc;
+	  padding: 3px 5px;
+	}
+	/deep/ table th {
+	  border-bottom: 2px solid #ccc;
+	  text-align: center;
+	}
 </style>
