@@ -4,7 +4,7 @@
       <div class="head">
         <div class="name">
           <div class="title">宜宾市第三人民医院</div>
-          <div class="tips">Vue3.0 后台管理系统</div>
+          <div class="tips">Vue3.x 后台管理系统</div>
         </div>
       </div>
       <el-form label-position="top" :rules="rules" :model="ruleForm" ref="loginForm" class="login-form">
