@@ -11,6 +11,7 @@
 		<el-table v-loading="loading" :data="tableData" stripe style="width: 100%">
 			<el-table-column prop="id" label="id" />
 			<el-table-column prop="name" label="专家名字" />
+			<el-table-column prop="office_name" label="科室" />
 			<el-table-column prop="position" label="职务" />
 			<el-table-column prop="professional" label="职称" />
 			<el-table-column label="图片">
