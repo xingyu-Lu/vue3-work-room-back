@@ -9,6 +9,8 @@
 			发布时间：<span v-html="data.release_time"></span>
 			<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
 			访问次数：<span v-html="data.num"></span>
+			<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+			作者：<span>{{ data.name }}</span>
 		</div>
 		<div v-html="data.content"></div>
 	</el-card>
@@ -44,17 +46,19 @@
 					release_time: '',
 					content: '',
 					num: '',
+					name: '',
 				},
 			})
 
 			onMounted(() => {
 				if (id) {
-					axios.get(`/api/back/jobs/${id}`).then(res => {
+					axios.get(`/api/back/voiceEmployees/${id}`).then(res => {
 						state.data = {
 							title: res.data.title,
 							release_time: res.data.release_time,
 							content: res.data.content,
 							num: res.data.num,
+							name: res.data.staff_name
 						}
 					})
 				}
@@ -62,7 +66,7 @@
 
 			const handleBack = () => {
 				router.push({
-					path: '/job',
+					path: '/voiceemployee',
 				})
 			}
 

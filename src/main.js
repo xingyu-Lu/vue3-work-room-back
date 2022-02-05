@@ -2,6 +2,7 @@ import {
 	createApp
 } from 'vue'
 import {
+	ElTree,
 	ElDescriptions,
 	ElDatePicker,
 	ElSwitch,
@@ -59,7 +60,7 @@ import router from './router/index.js'
 const app = createApp(App)
 
 app.use(router)
-app.use(ElDescriptions).use(ElDatePicker).use(ElConfigProvider).use(ElSwitch).use(ElSpace).use(ElDivider).use(ElTimeline).use(ElTimelineItem).use(ElEmpty).use(ElBreadcrumb).use(ElCarousel).use(ElCarouselItem).use(ElIcon).use(ElCollapseTransition).use(ElRow)
+app.use(ElTree).use(ElDescriptions).use(ElDatePicker).use(ElConfigProvider).use(ElSwitch).use(ElSpace).use(ElDivider).use(ElTimeline).use(ElTimelineItem).use(ElEmpty).use(ElBreadcrumb).use(ElCarousel).use(ElCarouselItem).use(ElIcon).use(ElCollapseTransition).use(ElRow)
 	.use(ElCol)
 	.use(ElLink)
 	.use(ElImage)

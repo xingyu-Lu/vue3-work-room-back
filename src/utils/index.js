@@ -129,6 +129,15 @@ export const pathMap = {
 	// 员工之声
 	voiceemployee: '员工之声',
 	voiceemployee_preview: '员工之声',
+	
+	// 员工管理
+	staff: '员工管理',
+	staff_add: '员工管理',
+	
+	// 角色管理
+	role: '角色管理',
+	role_add: '角色管理',
+	
 
 	api_test: 'api 测试',
 	good: '商品列表',

@@ -9,6 +9,11 @@
 		<el-table v-loading="loading" :data="tableData" stripe style="width: 100%">
 			<el-table-column prop="id" label="id" />
 			<el-table-column prop="name" label="账号" />
+			<el-table-column prop="role" label="角色">
+				<template #default="scope">
+					<span v-for="(item, index) in scope.row.roles">{{ item.name }}</span>
+				</template>
+			</el-table-column>
 			<el-table-column prop="status" label="状态">
 				<template #default="scope">
 					<!-- <el-switch :v-model="scope.row.status == 1 ? ture : false" active-value="1" inactive-value="0" /> -->

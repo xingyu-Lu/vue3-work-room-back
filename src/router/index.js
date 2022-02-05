@@ -326,15 +326,38 @@ const router = createRouter({
 	},
 	// 员工之声
 	{
-	  path: '/voiceemployee',
-	  name: 'voiceemployee',
-	  component: () => import('../views/voiceemployee/index.vue'),
+		path: '/voiceemployee',
+		name: 'voiceemployee',
+		component: () => import('../views/voiceemployee/index.vue'),
 	},
 	{
 		path: '/voiceemployee-preview',
 		name: 'voiceemployee_preview',
 		component: () => import('../views/voiceemployee/preview.vue'),
 	},
+	// 员工管理
+	{
+		path: '/staff',
+		name: 'staff',
+		component: () => import('../views/staff/index.vue'),
+	},
+	{
+		path: '/staff-add',
+		name: 'staff_add',
+		component: () => import('../views/staff/add.vue'),
+	},
+	// 角色管理
+	{
+		path: '/role',
+		name: 'role',
+		component: () => import('../views/role/index.vue'),
+	},
+	{
+		path: '/role-add',
+		name: 'role_add',
+		component: () => import('../views/role/add.vue'),
+	},
+	
 	
 	
 	

@@ -108,6 +108,7 @@
 				token: 'Bearer ' + sessionGet('token') || '',
 				id: id,
 				Form: {
+					type: '',
 					img_url: '',
 					img: '',
 					office_id: '',
