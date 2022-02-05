@@ -39,6 +39,11 @@
 			<el-form-item label="标题" prop="title">
 				<el-input v-model="Form.title" placeholder="请输入标题" type="text"></el-input>
 			</el-form-item>
+			<el-form-item label="附件" prop='attachment'>
+				<el-upload ref="attachmentRef" :headers="{ Authorization: token }" :action="uploadImgServer" :on-remove="handleAttachmentRemove" :on-success="handleAttachmentSuccess" :auto-upload="true" :data="{ basket: 'attachment' }" :limit="3" multiple :file-list="Form.attachmentFileList">
+					<el-button type="primary">上传</el-button>
+				</el-upload>
+			</el-form-item>
 			<el-form-item label="内容" prop="content">
 				<div ref='editor' style="z-index: 1;"></div>
 			</el-form-item>
@@ -108,6 +113,7 @@
 				token: 'Bearer ' + sessionGet('token') || '',
 				id: id,
 				Form: {
+					attachment: '',
 					type: '',
 					img_url: '',
 					img: '',
@@ -118,6 +124,7 @@
 					status: '0',
 					disabled: true,
 					fileList: [],
+					attachmentFileList: [],
 					list: [],
 				},
 				rules: {
@@ -216,6 +223,8 @@
 						state.Form = {
 							// img_url: res.data.url || '',
 							// img: res.data.file_id,
+							attachment: res.data.attachment_id,
+							attachmentFileList: res.data.attachment,
 							type: res.data.type,
 							title: res.data.title,
 							release_time: res.data.release_time,
@@ -244,6 +253,7 @@
 						let httpOption = axios.post
 						let params = {
 							// img: state.Form.img,
+							attachment: state.Form.attachment,
 							type: state.Form.type,
 							title: state.Form.title,
 							content: instance.txt.html(),
@@ -296,11 +306,28 @@
 				uploadRef.value.clearFiles()
 				state.Form.img = ''
 			}
+			
+			const handleAttachmentSuccess = (val) => {
+				ElMessage.success('上传成功')
+				state.Form.attachmentFileList.push({name: val.data.src, url: val.data.src})
+				if (state.Form.attachment) {
+					state.Form.attachment = state.Form.attachment + ',' + val.data.id
+				} else {
+					state.Form.attachment = val.data.id
+				}
+			}
+			
+			const handleAttachmentRemove = (val) => {
+				attachmentRef.value.clearFiles()
+				state.Form.attachment = ''
+				state.Form.attachmentFileList = []
+			}
 
 			return {
 				...toRefs(state),
 				editor,
 				uploadRef,
+				attachmentRef,
 				Ref,
 				submitAdd,
 				uploadImgServer,
@@ -308,6 +335,8 @@
 				handleUrlSuccess,
 				handleUrlError,
 				handleRemove,
+				handleAttachmentSuccess,
+				handleAttachmentRemove,
 			}
 		}
 	}
