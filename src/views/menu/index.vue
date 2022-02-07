@@ -102,7 +102,7 @@
 					is_enabled: status
 				}).then(() => {
 					ElMessage.success('修改成功')
-					getAdminList()
+					getMenuList()
 				})
 			}
 
