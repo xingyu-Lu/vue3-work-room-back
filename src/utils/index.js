@@ -134,6 +134,9 @@ export const pathMap = {
 	staff: '员工管理',
 	staff_add: '员工管理',
 	
+	// 员工文件云盘
+	fileemployee: '员工文件',
+	
 	// 角色管理
 	role: '角色管理',
 	role_add: '角色管理',

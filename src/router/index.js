@@ -346,6 +346,12 @@ const router = createRouter({
 		name: 'staff_add',
 		component: () => import('../views/staff/add.vue'),
 	},
+	// 员工文件(云盘)
+	{
+		path: '/fileemployee',
+		name: 'fileemployee',
+		component: () => import('../views/fileemployee/index.vue'),
+	},
 	// 角色管理
 	{
 		path: '/role',
