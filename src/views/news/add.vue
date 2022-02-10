@@ -281,7 +281,7 @@
 
 			const handleBeforeUpload = (file) => {
 				const sufix = file.name.split('.')[1] || ''
-				if (!['jpg', 'jpeg', 'png'].includes(sufix)) {
+				if (!['jpg', 'jpeg', 'png', 'gif'].includes(sufix)) {
 					ElMessage.error('请上传 jpg、jpeg、png 格式的图片')
 					return false
 				}
