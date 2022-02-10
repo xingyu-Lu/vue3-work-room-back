@@ -74,7 +74,7 @@
 	}
 </script>
 
-<style>
+<style scoped>
 	/* table 样式 */
 	:deep() table {
 	  border-top: 1px solid #ccc;
