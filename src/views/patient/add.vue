@@ -274,7 +274,10 @@
 								ElMessage.success('添加成功')
 							}
 							router.push({
-								path: '/patient'
+								path: '/patient',
+								query: {
+									type: params.type
+								}
 							})
 						})
 					}

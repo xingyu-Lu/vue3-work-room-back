@@ -263,7 +263,10 @@
 								ElMessage.success('添加成功')
 							}
 							router.push({
-								path: '/scientific'
+								path: '/scientific',
+								query: {
+									type: params.type
+								}
 							})
 						})
 					}

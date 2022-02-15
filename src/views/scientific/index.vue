@@ -74,6 +74,10 @@
 		name: 'dynamin_index',
 		setup() {
 			const router = useRouter()
+			const route = useRoute()
+			const {
+				type
+			} = route.query
 			const state = reactive({
 				type: '0',
 				title: '',
@@ -84,6 +88,9 @@
 				pageSize: 10 // 分页大小
 			})
 			onMounted(() => {
+				if (type) {
+					state.type = type
+				}
 				getDynamicsList()
 				// getSrcList()
 			})

@@ -272,7 +272,10 @@
 								ElMessage.success('添加成功')
 							}
 							router.push({
-								path: '/news'
+								path: '/news',
+								query: {
+									type: params.type
+								}
 							})
 						})
 					}

@@ -275,7 +275,10 @@
 								ElMessage.success('添加成功')
 							}
 							router.push({
-								path: '/party'
+								path: '/party',
+								query: {
+									type: params.type
+								}
 							})
 						})
 					}

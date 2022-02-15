@@ -44,6 +44,7 @@
 					release_time: '',
 					content: '',
 					num: '',
+					type: 0,
 				},
 			})
 
@@ -55,6 +56,7 @@
 							release_time: res.data.release_time,
 							content: res.data.content,
 							num: res.data.num,
+							type: res.data.type
 						}
 					})
 				}
@@ -63,6 +65,9 @@
 			const handleBack = () => {
 				router.push({
 					path: '/news',
+					query: {
+						type: state.data.type
+					}
 				})
 			}
 
