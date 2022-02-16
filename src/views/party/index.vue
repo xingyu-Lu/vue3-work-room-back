@@ -11,7 +11,7 @@
 					<el-option value="4" label="医德医风"></el-option>
 					<el-option value="5" label="青年加油站"></el-option>
 				</el-select>
-				<el-input style="width: 200px; margin-top: 20px; margin-right: 10px; margin-left: 10px;" placeholder="请输入科室名称" v-model="title" clearable />
+				<el-input style="width: 200px; margin-top: 20px; margin-right: 10px; margin-left: 10px;" placeholder="请输入标题" v-model="title" clearable />
 				<el-button type="primary" @click="handleOption">搜索</el-button>
 			</div>
 		</template>

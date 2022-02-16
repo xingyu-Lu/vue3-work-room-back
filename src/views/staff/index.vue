@@ -3,7 +3,7 @@
 		<template #header>
 			<!-- <el-button type="primary" :icon="Plus" @click="handleAdd">新增</el-button> -->
 			<div>
-				<el-input style="width: 200px; margin-top: 20px; margin-right: 10px;" placeholder="请输入名称" v-model="name" clearable />
+				<el-input style="width: 200px; margin-top: 20px; margin-right: 10px;" placeholder="请输入名字" v-model="name" clearable />
 				<el-button type="primary" @click="handleOption">搜索</el-button>
 			</div>
 		</template>
