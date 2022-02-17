@@ -38,6 +38,7 @@
 			<el-table-column label="操作" width="200">
 				<template #default="scope">
 					<a style="cursor: pointer; margin-right: 10px; color: #409EFF;" v-if="scope.row.status != 0" @click="handleStatus(scope.row.id, 0)">删除</a>
+					<a style="text-decoration: none; cursor: pointer; margin-right: 10px; color: #409EFF;" :href="scope.row.file_url">下载</a>
 					<!-- <a style="cursor: pointer; margin-right: 10px" v-if="scope.row.status == 1"
 						@click="handleStatus(scope.row.id, 0)">撤销审核</a> -->
 					<!-- <a style="cursor: pointer; margin-right: 10px" v-else-if="scope.row.status == 0" @click="handleStatus(scope.row.id, 1)">审核</a> -->
