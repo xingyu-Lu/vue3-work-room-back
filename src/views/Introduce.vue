@@ -21,6 +21,7 @@
 			<li>人才招聘</li>
 			<li>员工管理</li>
 			<li>院内员工发文</li>
+			<li>文件云盘</li>
 		</ul>
 		<h1>技术选型</h1>
 		<ul style="font-weight: bold; line-height: 32px;">
