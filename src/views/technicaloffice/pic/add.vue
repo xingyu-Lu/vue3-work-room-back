@@ -140,7 +140,7 @@
 							office_id: res.data.office_id,
 							title: res.data.title,
 							status: String(res.data.status),
-							fileList: [res.data.url],
+							fileList: [{url: res.data.url}],
 							disabled: true
 						}
 						

@@ -224,7 +224,7 @@
 							title: res.data.title,
 							release_time: res.data.release_time,
 							status: String(res.data.status),
-							fileList: [res.data.url],
+							fileList: [{url: res.data.url}],
 							disabled: true
 						}
 

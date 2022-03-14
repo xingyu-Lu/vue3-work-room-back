@@ -234,7 +234,7 @@
 							excel: res.data.excel,
 							sort: res.data.sort,
 							status: String(res.data.status),
-							fileList: [res.data.url],
+							fileList: [{url: res.data.url}],
 							disabled: true
 						}
 						
