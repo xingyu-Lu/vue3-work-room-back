@@ -10,10 +10,13 @@
 				</el-select>
 				<el-input style="width: 200px; margin-top: 20px; margin-right: 10px; margin-left: 10px;" placeholder="请输入标题" v-model="title" clearable />
 				<el-button type="primary" @click="handleOption">搜索</el-button>
+				<el-button type="primary" @click="handleRecommend">设置推荐</el-button>
+				<el-button type="primary" @click="handleCancelRecommend">取消推荐</el-button>
 			</div>
 		</template>
 
-		<el-table v-loading="loading" :data="tableData" stripe style="width: 100%">
+		<el-table v-loading="loading" :data="tableData" stripe style="width: 100%" @selection-change="handleSelectionChange">
+			<el-table-column type="selection" />
 			<el-table-column prop="id" label="id" />
 			<el-table-column label="图片">
 				<template #default="scope">
@@ -37,6 +40,12 @@
 					<span style="color: #67C23A;" v-if="scope.row.status == 1">已审核</span>
 					<span style="color: #E6A23C;" v-else-if="scope.row.status == 0">待审核</span>
 					<span style="color: #F56C6C;" v-else>已删除</span>
+				</template>
+			</el-table-column>
+			<el-table-column prop="is_recommend" label="是否推荐">
+				<template #default="scope">
+					<span style="color: #67C23A;" v-if="scope.row.is_recommend == 1">是</span>
+					<span style="color: #E6A23C;" v-else-if="scope.row.is_recommend == 0">否</span>
 				</template>
 			</el-table-column>
 			<el-table-column prop="created_at" label="创建时间" />
@@ -93,7 +102,8 @@
 				srcList: [],
 				total: 0, // 总条数
 				currentPage: 1, // 当前页
-				pageSize: 10 // 分页大小
+				pageSize: 10 ,// 分页大小
+				multipleSelection: [],
 			})
 			onMounted(() => {
 				if (type) {
@@ -170,6 +180,30 @@
 					getNewsList()
 				})
 			}
+			
+			const handleSelectionChange = (val) => {
+				state.multipleSelection = val
+			}
+			
+			const handleRecommend = () => {
+				axios.put('/api/back/news/recommend', {
+					multipleSelection: state.multipleSelection,
+					is_recommend: 1
+				}).then(() => {
+					ElMessage.success('设置成功')
+					getNewsList()
+				})
+			}
+			
+			const handleCancelRecommend = () => {
+				axios.put('/api/back/news/recommend', {
+					multipleSelection: state.multipleSelection,
+					is_recommend: 0
+				}).then(() => {
+					ElMessage.success('取消成功')
+					getNewsList()
+				})
+			}
 
 			return {
 				...toRefs(state),
@@ -179,6 +213,9 @@
 				handleEdit,
 				handleStatus,
 				handlePreview,
+				handleSelectionChange,
+				handleRecommend,
+				handleCancelRecommend,
 				Plus,
 			}
 		}
