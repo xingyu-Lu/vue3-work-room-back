@@ -249,6 +249,44 @@ const router = createRouter({
 		name: 'technicaloffice_healthscience_preview',
 		component: () => import('../views/technicaloffice/healthscience/preview.vue'),
 	},
+	// 科室成员
+	{
+		path: '/technicaloffice-member',
+		name: 'technicaloffice_member',
+		component: () => import('../views/technicaloffice/member/index.vue'),
+	},
+	{
+		path: '/technicaloffice-member-add',
+		name: 'technicaloffice_member_add',
+		component: () => import('../views/technicaloffice/member/add.vue'),
+	},
+	// 科室栏目设置
+	{
+		path: '/technicaloffice-column-set',
+		name: 'technicaloffice_column_set',
+		component: () => import('../views/technicaloffice/columnset/index.vue'),
+	},
+	{
+		path: '/technicaloffice-column-set-add',
+		name: 'technicaloffice_column_set_add',
+		component: () => import('../views/technicaloffice/columnset/add.vue'),
+	},
+	// 科室栏目
+	{
+		path: '/technicaloffice-column',
+		name: 'technicaloffice_column',
+		component: () => import('../views/technicaloffice/column/index.vue'),
+	},
+	{
+		path: '/technicaloffice-column-add',
+		name: 'technicaloffice_column_add',
+		component: () => import('../views/technicaloffice/column/add.vue'),
+	},
+	{
+		path: '/technicaloffice-column-preview',
+		name: 'technicaloffice_column_preview',
+		component: () => import('../views/technicaloffice/column/preview.vue'),
+	},
 	// 专家介绍
 	{
 		path: '/expert',

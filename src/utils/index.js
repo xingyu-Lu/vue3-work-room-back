@@ -102,6 +102,19 @@ export const pathMap = {
 	technicaloffice_healthscience_add: '科室健康科普',
 	technicaloffice_healthscience_preview: '科室健康科普预览',
 	
+	// 科室成员
+	technicaloffice_member: '科室成员',
+	technicaloffice_member_add: '科室成员',
+	
+	// 科室栏目设置
+	technicaloffice_column_set: '科室栏目设置',
+	technicaloffice_column_set_add: '科室栏目设置',
+	
+	// 科室栏目
+	technicaloffice_column: '科室栏目',
+	technicaloffice_column_add: '科室栏目',
+	technicaloffice_column_preview: '科室栏目',
+	
 	// 专家介绍
 	expert: '专家介绍',
 	expert_add: '专家介绍',
