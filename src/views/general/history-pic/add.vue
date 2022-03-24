@@ -196,6 +196,8 @@
 			const handleRemove = (file) => {
 				uploadRef.value.clearFiles()
 				state.historyPicForm.img = ''
+				state.historyPicForm.img_url = ''
+				state.historyPicForm.fileList = []
 			}
 
 			return {

@@ -14,11 +14,13 @@
 			<el-table-column prop="id" label="id" />
 			<el-table-column prop="office_name" label="科室名称" />
 			<el-table-column prop="column_name" label="栏目名称" />
+			<el-table-column prop="column_type_name" label="栏目类型" />
 			<el-table-column prop="title" label="标题" />
 			<el-table-column label="图片">
 				<template #default="scope">
-					<el-image :key="scope.row.id" :src="scope.row.url" :lazy=true :initial-index="1">
+					<el-image v-if="scope.row.url" :key="scope.row.id" :src="scope.row.url" :lazy=true :initial-index="1">
 					</el-image>
+					<span v-else>无</span>
 				</template>
 			</el-table-column>
 			<el-table-column prop="release_time" label="发布时间" />
@@ -27,13 +29,7 @@
 				<template #default="scope">
 					<span style="color: #67C23A;" v-if="scope.row.status == 1">已审核</span>
 					<span style="color: #E6A23C;" v-else-if="scope.row.status == 0">待审核</span>
-					<span style="color: #F56C6C;" v-else>已删除</span>
-				</template>
-			</el-table-column>
-			<el-table-column prop="type" label="类型">
-				<template #default="scope">
-					<span style="color: #67C23A;" v-if="scope.row.type == 1">仅图</span>
-					<span style="color: #E6A23C;" v-else-if="scope.row.type == 0">图文或视频</span>
+					<span style="color: #F56C6C;" v-else>审核不过</span>
 				</template>
 			</el-table-column>
 			<el-table-column prop="created_at" label="创建时间" />
@@ -41,8 +37,8 @@
 			<el-table-column label="操作" width="200">
 				<template #default="scope">
 					<a style="cursor: pointer; margin-right: 10px" @click="handlePreview(scope.row.id)">预览</a>
-					<a style="cursor: pointer; margin-right: 10px" v-if="scope.row.status != 2" @click="handleEdit(scope.row.id)">修改</a>
-					<a style="cursor: pointer; margin-right: 10px" v-if="scope.row.status != 2" @click="handleStatus(scope.row.id, 2)">删除</a>
+					<a style="cursor: pointer; margin-right: 10px" @click="handleEdit(scope.row.id)">修改</a>
+					<a style="cursor: pointer; margin-right: 10px" v-if="scope.row.status == 0" @click="handleStatus(scope.row.id, 2)">审核不过</a>
 					<a style="cursor: pointer; margin-right: 10px" v-if="scope.row.status == 1"
 						@click="handleStatus(scope.row.id, 0)">撤销审核</a>
 					<a style="cursor: pointer; margin-right: 10px" v-else-if="scope.row.status == 0" @click="handleStatus(scope.row.id, 1)">审核</a>

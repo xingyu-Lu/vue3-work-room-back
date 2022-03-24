@@ -10,6 +10,12 @@
 			<el-form-item label="栏目名字" prop="name">
 				<el-input v-model="Form.name" placeholder="请输入栏目名字" type="text"></el-input>
 			</el-form-item>
+			<el-form-item label="类型" prop="type">
+				<el-radio-group v-model="Form.type">
+					<el-radio label=1>仅图</el-radio>
+					<el-radio label=0>图文或视频</el-radio>
+				</el-radio-group>
+			</el-form-item>
 			<el-form-item>
 				<el-button type="primary" @click="submitAdd()">{{ id ? '立即修改' : '立即创建' }}</el-button>
 			</el-form-item>
@@ -60,6 +66,7 @@
 				Form: {
 					office_id: '',
 					name: '',
+					type: '0',
 					list: [],
 				},
 				
@@ -74,6 +81,11 @@
 						message: '栏目必须',
 						trigger: ['change'],
 					}],
+					type: [{
+						required: true,
+						message: '类型必须',
+						trigger: ['change'],
+					}],
 				}
 			})
 			
@@ -85,6 +97,7 @@
 						state.Form = {
 							office_id: res.data.office_id,
 							name: res.data.name,
+							type: String(res.data.type),
 						}
 					})
 				}
@@ -108,6 +121,7 @@
 							id: id,
 							office_id: state.Form.office_id,
 							name: state.Form.name,
+							type: state.Form.type,
 						}
 				
 						let url = '/api/back/technicalOfficeColumnSets'

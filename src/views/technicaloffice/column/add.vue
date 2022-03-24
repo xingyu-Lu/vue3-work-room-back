@@ -1,7 +1,7 @@
 <template>
 	<el-card style="min-height: 100%;">
 		<el-descriptions title="提示">
-		    <el-descriptions-item>类型为仅图：则必须传图片；类型为图文或视频：则内容必须</el-descriptions-item>
+		    <el-descriptions-item>栏目类型为仅图：则必须传图片；栏目类型为图文或视频：则内容必须</el-descriptions-item>
 		</el-descriptions>
 		<el-divider></el-divider>
 		<el-form :model="Form" :rules="rules" ref="Ref" label-width="100px">
@@ -13,7 +13,7 @@
 			</el-form-item>
 			<el-form-item label="栏目" prop="column_id">
 				<el-select v-model="Form.column_id" placeholder="Select" filterable>
-					<el-option v-for="item in Form.column_list" :key="item.id" :label="item.name" :value="item.id">
+					<el-option v-for="item in Form.column_list" :key="item.id" :label="item.name+item.type_name" :value="item.id">
 					</el-option>
 				</el-select>
 			</el-form-item>
@@ -52,12 +52,6 @@
 				<el-date-picker v-model="Form.release_time" type="datetime" :default-value="new Date()"
 					placeholder="请输入发布时间">
 				</el-date-picker>
-			</el-form-item>
-			<el-form-item label="类型" prop="type">
-				<el-radio-group v-model="Form.type">
-					<el-radio label=1>仅图</el-radio>
-					<el-radio label=0>图文或视频</el-radio>
-				</el-radio-group>
 			</el-form-item>
 			<el-form-item label="状态" prop="status">
 				<el-radio-group v-model="Form.status" disabled>
@@ -146,23 +140,18 @@
 						trigger: ['change'],
 					}],
 					title: [{
-						required: 'true',
+						required: true,
 						message: '标题必须',
 						trigger: ['change'],
 					}],
 					release_time: [{
-						required: 'true',
+						required: true,
 						message: '发布时间必须',
 						trigger: ['change'],
 					}],
 					status: [{
-						required: false,
+						required: true,
 						message: '状态必须',
-						trigger: ['change'],
-					}],
-					type: [{
-						required: false,
-						message: '类型必须',
 						trigger: ['change'],
 					}],
 				},
@@ -244,7 +233,6 @@
 							title: res.data.title,
 							release_time: res.data.release_time,
 							status: String(res.data.status),
-							type: String(res.data.type),
 							fileList: [{url: res.data.url}],
 							disabled: true
 						}
@@ -289,7 +277,6 @@
 							content: instance.txt.html(),
 							release_time: state.Form.release_time,
 							status: state.Form.status,
-							type: state.Form.type,
 						}
 
 						let url = '/api/back/technicalOfficeColumns'
@@ -336,6 +323,8 @@
 			const handleRemove = (file) => {
 				uploadRef.value.clearFiles()
 				state.Form.img = ''
+				state.Form.img_url = ''
+				state.Form.fileList = []
 			}
 
 			return {

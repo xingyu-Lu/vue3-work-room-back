@@ -13,6 +13,12 @@
 			<el-table-column prop="id" label="id" />
 			<el-table-column prop="office_name" label="科室名称" />
 			<el-table-column prop="name" label="栏目名称" />
+			<el-table-column prop="type" label="类型">
+				<template #default="scope">
+					<span style="color: #67C23A;" v-if="scope.row.type == 1">仅图</span>
+					<span style="color: #E6A23C;" v-else-if="scope.row.type == 0">图文或视频</span>
+				</template>
+			</el-table-column>
 			<el-table-column prop="created_at" label="创建时间" />
 			
 			<el-table-column label="操作" width="200">

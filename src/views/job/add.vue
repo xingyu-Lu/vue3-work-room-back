@@ -305,6 +305,8 @@
 			const handleRemove = (file) => {
 				uploadRef.value.clearFiles()
 				state.Form.img = ''
+				state.Form.img_url = ''
+				state.Form.fileList = []
 			}
 			
 			const handleAttachmentSuccess = (val) => {
