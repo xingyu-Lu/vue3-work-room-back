@@ -130,12 +130,12 @@
 							status: state.Form.status,
 						}
 			
-						if (params.name.length > 30) {
-							ElMessage.error('科室名称不能超过30个字符')
+						if (params.name.length > 50) {
+							ElMessage.error('科室名称不能超过50个字符')
 							return
 						}
-						if (params.address.length > 30) {
-							ElMessage.error('科室地址不能超过30个字符')
+						if (params.address.length > 100) {
+							ElMessage.error('科室地址不能超过100个字符')
 							return
 						}
 			
