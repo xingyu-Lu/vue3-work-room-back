@@ -137,17 +137,17 @@
 						trigger: ['change'],
 					}],
 					name: [{
-						required: 'true',
+						required: true,
 						message: '姓名必须',
 						trigger: ['change'],
 					}],
 					position: [{
-						required: 'true',
+						required: false,
 						message: '职务必须',
 						trigger: ['change'],
 					}],
 					professional: [{
-						required: 'true',
+						required: false,
 						message: '职称必须',
 						trigger: ['change'],
 					}],
