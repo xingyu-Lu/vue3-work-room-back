@@ -128,7 +128,7 @@
 				if (id) {
 					axios.get(`/api/back/technicalOfficeOutpatients/${id}`).then(res => {
 						state.Form = {
-							office_id: String(res.data.office_id),
+							office_id: res.data.office_id,
 							yq_type: String(res.data.yq_type),
 							monday: res.data.monday,
 							tuesday: res.data.tuesday,
