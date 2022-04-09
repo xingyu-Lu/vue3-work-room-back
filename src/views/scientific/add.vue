@@ -212,7 +212,7 @@
 						state.Form = {
 							// img_url: res.data.url || '',
 							// img: res.data.file_id,
-							type: res.data.type,
+							type: String(res.data.type),
 							title: res.data.title,
 							release_time: res.data.release_time,
 							status: String(res.data.status),
@@ -240,7 +240,7 @@
 						let httpOption = axios.post
 						let params = {
 							// img: state.Form.img,
-							type: String(state.Form.type),
+							type: state.Form.type,
 							title: state.Form.title,
 							content: instance.txt.html(),
 							release_time: state.Form.release_time,
