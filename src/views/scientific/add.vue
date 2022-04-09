@@ -240,7 +240,7 @@
 						let httpOption = axios.post
 						let params = {
 							// img: state.Form.img,
-							type: state.Form.type,
+							type: String(state.Form.type),
 							title: state.Form.title,
 							content: instance.txt.html(),
 							release_time: state.Form.release_time,
