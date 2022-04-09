@@ -223,7 +223,7 @@
 						state.Form = {
 							// img_url: res.data.url || '',
 							// img: res.data.file_id,
-							type: res.data.type,
+							type: String(res.data.type),
 							title: res.data.title,
 							release_time: res.data.release_time,
 							status: String(res.data.status),

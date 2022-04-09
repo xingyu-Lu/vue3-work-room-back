@@ -145,8 +145,11 @@
 			})
 			
 			const get_technicaloffice_list = async () => {
-				const list = await axios.get('/api/back/technicalOffices')
-				state.Form.list = list.data
+				// const list = await axios.get('/api/back/technicalOffices')
+				// state.Form.list = list.data
+				axios.get('/api/back/technicalOffices').then(res => {
+					state.Form.list = res.data
+				})
 			}
 			
 			const submitAdd = () => {
