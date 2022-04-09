@@ -225,7 +225,7 @@
 							// img: res.data.file_id,
 							attachment: res.data.attachment_id,
 							attachmentFileList: res.data.attachment,
-							type: res.data.type,
+							type: String(res.data.type),
 							title: res.data.title,
 							release_time: res.data.release_time,
 							status: String(res.data.status),

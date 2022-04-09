@@ -208,7 +208,7 @@
 				instance.create()
 				
 				if (id) {
-					axios.get(`/api/back/technicalOfficeHealthSciences/${id}`).then(res => {
+					axios.get(`/api/back/scientifics/${id}`).then(res => {
 						state.Form = {
 							// img_url: res.data.url || '',
 							// img: res.data.file_id,
