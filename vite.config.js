@@ -4,6 +4,7 @@ import path from 'path'
 
 const baseUrl = {
   development: './',
+  test: './',
   beta: './',
   release: './',
   production: './',
