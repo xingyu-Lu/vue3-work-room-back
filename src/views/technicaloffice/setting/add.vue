@@ -69,32 +69,32 @@
 				
 				rules: {
 					name: [{
-						required: 'true',
+						required: true,
 						message: '科室名称必须',
 						trigger: ['change'],
 					}],
 					address: [{
-						required: 'true',
+						required: false,
 						message: '科室地址必须',
 						trigger: ['change'],
 					}],
 					phone: [{
-						required: 'true',
+						required: false,
 						message: '科室电话必须',
 						trigger: ['change'],
 					}],
 					index: [{
-						required: 'true',
+						required: true,
 						message: '科室索引必须',
 						trigger: ['change'],
 					}],
 					sort: [{
-						required: 'true',
+						required: true,
 						message: '科室排序必须',
 						trigger: ['change'],
 					}],
 					status: [{
-						required: 'true',
+						required: true,
 						message: '状态必须',
 						trigger: ['change'],
 					}],
