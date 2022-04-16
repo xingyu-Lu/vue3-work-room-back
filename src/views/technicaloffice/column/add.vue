@@ -6,7 +6,7 @@
 		<el-divider></el-divider>
 		<el-form :model="Form" :rules="rules" ref="Ref" label-width="100px">
 			<el-form-item label="科室" prop="office_id">
-				<el-select v-model="Form.office_id" placeholder="Select" filterable>
+				<el-select v-model="Form.office_id" placeholder="Select" value-key="item.id" @change="get_technicaloffice_column_set_list" filterable>
 					<el-option v-for="item in Form.list" :key="item.id" :label="item.name" :value="item.id">
 					</el-option>
 				</el-select>
@@ -221,7 +221,7 @@
 				
 				get_technicaloffice_list()
 				
-				get_technicaloffice_column_set_list()
+				// get_technicaloffice_column_set_list()
 
 				if (id) {
 					axios.get(`/api/back/technicalOfficeColumns/${id}`).then(res => {
@@ -258,8 +258,13 @@
 				})
 			}
 			
-			const get_technicaloffice_column_set_list = () => {
-				axios.get('/api/back/technicalOfficeColumnSets/list').then(res => {
+			const get_technicaloffice_column_set_list = (office_id) => {
+				console.log(office_id)
+				axios.get('/api/back/technicalOfficeColumnSets/list', {
+					params: {
+						office_id: office_id,
+					}
+				}).then(res => {
 					state.Form.column_list = res.data
 				})
 			}
@@ -338,6 +343,7 @@
 				handleUrlSuccess,
 				handleUrlError,
 				handleRemove,
+				get_technicaloffice_column_set_list,
 			}
 		}
 	}
