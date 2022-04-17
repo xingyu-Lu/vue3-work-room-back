@@ -14,6 +14,13 @@
 			<el-table-column prop="address" label="地址" />
 			<el-table-column prop="phone" label="电话" />
 			<el-table-column prop="index" label="索引" />
+			<el-table-column prop="type" label="类型">
+				<template #default="scope">
+					<span style="color: #67C23A;" v-if="scope.row.type == 0">临床部门</span>
+					<span style="color: #E6A23C;" v-else-if="scope.row.type == 1">医技部门</span>
+					<span style="color: #F56C6C;" v-else>保障部门</span>
+				</template>
+			</el-table-column>
 			<el-table-column prop="status" label="状态">
 				<template #default="scope">
 					<span style="color: #67C23A;" v-if="scope.row.status == 1">已审核</span>

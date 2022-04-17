@@ -16,7 +16,14 @@
 			<el-form-item label="排序" prop="sort">
 				<el-input v-model="Form.sort" placeholder="请输入排序" type="number" min="0"></el-input>
 			</el-form-item>
-			<el-form-item label="上架状态" prop="status">
+			<el-form-item label="类型" prop="type">
+				<el-radio-group v-model="Form.type">
+					<el-radio label=0>临床部门</el-radio>
+					<el-radio label=1>医技部门</el-radio>
+					<el-radio label=2>保障部门</el-radio>
+				</el-radio-group>
+			</el-form-item>
+			<el-form-item label="状态" prop="status">
 				<el-radio-group v-model="Form.status" disabled>
 					<el-radio label=1>开启</el-radio>
 					<el-radio label=0>禁用</el-radio>
@@ -65,6 +72,7 @@
 					index: '',
 					sort: '0',
 					status: '1',
+					type: '0',
 				},
 				
 				rules: {
@@ -93,6 +101,11 @@
 						message: '科室排序必须',
 						trigger: ['change'],
 					}],
+					type: [{
+						required: true,
+						message: '类型必须',
+						trigger: ['change'],
+					}],
 					status: [{
 						required: true,
 						message: '状态必须',
@@ -110,6 +123,7 @@
 							phone: res.data.phone,
 							index: res.data.index,
 							sort: res.data.sort,
+							type: String(res.data.type),
 							status: String(res.data.status),
 						}
 					})
@@ -127,6 +141,7 @@
 							phone: state.Form.phone,
 							index: state.Form.index,
 							sort: state.Form.sort,
+							type: state.Form.type,
 							status: state.Form.status,
 						}
 			
