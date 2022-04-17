@@ -229,7 +229,7 @@
 							img_url: res.data.url || '',
 							img: res.data.file_id,
 							office_id: res.data.office_id,
-							column_id: res.data.column_id,
+							column_id: String(res.data.column_id),
 							title: res.data.title,
 							release_time: res.data.release_time,
 							status: String(res.data.status),
