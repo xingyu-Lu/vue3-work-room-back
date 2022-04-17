@@ -16,13 +16,13 @@
 			<el-table-column prop="column_name" label="栏目名称" />
 			<el-table-column prop="column_type_name" label="栏目类型" />
 			<el-table-column prop="title" label="标题" />
-			<el-table-column label="图片">
+			<!-- <el-table-column label="图片">
 				<template #default="scope">
 					<el-image v-if="scope.row.url" :key="scope.row.id" :src="scope.row.url" :lazy=true :initial-index="1">
 					</el-image>
 					<span v-else>无</span>
 				</template>
-			</el-table-column>
+			</el-table-column> -->
 			<el-table-column prop="release_time" label="发布时间" />
 			<el-table-column prop="num" label="浏览次数" />
 			<el-table-column prop="status" label="状态">
