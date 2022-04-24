@@ -25,6 +25,7 @@
 			</el-table-column> -->
 			<el-table-column prop="release_time" label="发布时间" />
 			<el-table-column prop="num" label="浏览次数" />
+			<el-table-column prop="sort" label="排序" />
 			<el-table-column prop="status" label="状态">
 				<template #default="scope">
 					<span style="color: #67C23A;" v-if="scope.row.status == 1">已审核</span>

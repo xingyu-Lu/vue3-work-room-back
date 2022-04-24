@@ -53,6 +53,9 @@
 					placeholder="请输入发布时间">
 				</el-date-picker>
 			</el-form-item>
+			<el-form-item label="排序" prop="sort">
+				<el-input v-model="Form.sort" placeholder="请输入排序" type="number"></el-input>
+			</el-form-item>
 			<el-form-item label="状态" prop="status">
 				<el-radio-group v-model="Form.status" disabled>
 					<el-radio label=1>已审核</el-radio>
@@ -122,6 +125,7 @@
 					title: '',
 					content: '',
 					release_time: ref(''),
+					sort: '0',
 					status: '0',
 					disabled: true,
 					fileList: [],
@@ -147,6 +151,11 @@
 					release_time: [{
 						required: true,
 						message: '发布时间必须',
+						trigger: ['change'],
+					}],
+					sort: [{
+						required: false,
+						message: '排序必须',
 						trigger: ['change'],
 					}],
 					status: [{
@@ -232,6 +241,7 @@
 							column_id: String(res.data.column_id),
 							title: res.data.title,
 							release_time: res.data.release_time,
+							sort: res.data.sort,
 							status: String(res.data.status),
 							fileList: [{url: res.data.url}],
 							disabled: true
@@ -281,6 +291,7 @@
 							title: state.Form.title,
 							content: instance.txt.html(),
 							release_time: state.Form.release_time,
+							sort: state.Form.sort,
 							status: state.Form.status,
 						}
 
