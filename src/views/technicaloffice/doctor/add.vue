@@ -41,6 +41,7 @@
 					<el-option value="副主任医师" label="副主任医师"></el-option>
 					<el-option value="主治医师" label="主治医师"></el-option>
 					<el-option value="医师" label="医师"></el-option>
+					<el-option value="" label="无"></el-option>
 				</el-select>
 			</el-form-item>
 			<!-- <el-form-item label="职称" prop="professional">
