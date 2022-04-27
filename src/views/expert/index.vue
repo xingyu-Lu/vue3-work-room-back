@@ -22,6 +22,7 @@
 			</el-table-column>
 			<el-table-column prop="excel" label="擅长" />
 			<el-table-column prop="sort" label="排序" />
+			<el-table-column prop="index" label="索引" />
 			<el-table-column prop="status" label="状态">
 				<template #default="scope">
 					<span style="color: #67C23A;" v-if="scope.row.status == 1">已审核</span>

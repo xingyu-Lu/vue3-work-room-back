@@ -23,6 +23,7 @@
 		<el-table v-loading="loading" :data="tableData" stripe style="width: 100%">
 			<el-table-column prop="id" label="id" />
 			<el-table-column prop="title" label="标题" />
+			<el-table-column prop="office_name" label="科室名称" />
 			<el-table-column prop="release_time" label="发布时间" />
 			<el-table-column prop="num" label="浏览次数" />
 			<el-table-column prop="type" label="类型">

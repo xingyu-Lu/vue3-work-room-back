@@ -36,8 +36,16 @@
 				<el-input v-model="Form.name" placeholder="请输入名字" type="text"></el-input>
 			</el-form-item>
 			<el-form-item label="职称" prop="professional">
-				<el-input v-model="Form.professional" placeholder="请输入职称" type="text"></el-input>
+				<el-select v-model="Form.professional" placeholder="Select" filterable>
+					<el-option value="主任医师" label="主任医师"></el-option>
+					<el-option value="副主任医师" label="副主任医师"></el-option>
+					<el-option value="主治医师" label="主治医师"></el-option>
+					<el-option value="医师" label="医师"></el-option>
+				</el-select>
 			</el-form-item>
+			<!-- <el-form-item label="职称" prop="professional">
+				<el-input v-model="Form.professional" placeholder="请输入职称" type="text"></el-input>
+			</el-form-item> -->
 			<el-form-item label="擅长" prop="excel">
 				<el-input v-model="Form.excel" placeholder="请输入擅长" type="text"></el-input>
 			</el-form-item>
@@ -162,6 +170,7 @@
 			let instance
 			onMounted(() => {
 				instance = new WangEditor(editor.value)
+				instance.config.lineHeights = ['1', '1.15', '1.5', '2', '2.5', '3']
 				instance.config.showLinkImg = false
 				instance.config.showLinkImgAlt = false
 				instance.config.showLinkImgHref = false

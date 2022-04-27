@@ -159,6 +159,7 @@
 			let instance
 			onMounted(() => {
 				instance = new WangEditor(editor.value)
+				instance.config.lineHeights = ['1', '1.15', '1.5', '2', '2.5', '3']
 				instance.config.showLinkImg = false
 				instance.config.showLinkImgAlt = false
 				instance.config.showLinkImgHref = false

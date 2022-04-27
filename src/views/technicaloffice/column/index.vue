@@ -7,10 +7,12 @@
 				<el-input style="width: 200px; margin-top: 20px; margin-right: 10px;" placeholder="请输入栏目名称" v-model="column_name" clearable />
 				<el-input style="width: 200px; margin-top: 20px; margin-right: 10px;" placeholder="请输入标题" v-model="title" clearable />
 				<el-button type="primary" @click="handleOption">搜索</el-button>
+				<el-button type="primary" @click="handleHealthPromotion">设置为健康促进</el-button>
 			</div>
 		</template>
 
-		<el-table v-loading="loading" :data="tableData" stripe style="width: 100%">
+		<el-table v-loading="loading" :data="tableData" stripe style="width: 100%" @selection-change="handleSelectionChange">
+			<el-table-column type="selection" />
 			<el-table-column prop="id" label="id" />
 			<el-table-column prop="office_name" label="科室名称" />
 			<el-table-column prop="column_name" label="栏目名称" />
@@ -83,7 +85,8 @@
 				tableData: [], // 数据列表
 				total: 0, // 总条数
 				currentPage: 1, // 当前页
-				pageSize: 10 // 分页大小
+				pageSize: 10, // 分页大小
+				multipleSelection: [],
 			})
 			onMounted(() => {
 				getColumnsList()
@@ -151,6 +154,19 @@
 					getColumnsList()
 				})
 			}
+			
+			const handleSelectionChange = (val) => {
+				state.multipleSelection = val
+			}
+			
+			const handleHealthPromotion = () => {
+				axios.put('/api/back/technicalOfficeColumns/healthPromotion', {
+					multipleSelection: state.multipleSelection,
+				}).then(() => {
+					ElMessage.success('设置成功')
+					getNewsList()
+				})
+			}
 
 			return {
 				...toRefs(state),
@@ -160,6 +176,8 @@
 				handleEdit,
 				handleStatus,
 				handlePreview,
+				handleSelectionChange,
+				handleHealthPromotion,
 				Plus,
 			}
 		}
