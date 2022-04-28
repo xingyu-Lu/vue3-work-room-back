@@ -5,6 +5,7 @@
 			<div>
 				<el-input style="width: 200px; margin-top: 20px; margin-right: 10px;" placeholder="请输入科室名称" v-model="office_name" clearable />
 				<el-button type="primary" @click="handleOption">搜索</el-button>
+				<el-button type="primary" @click="handleSynExpert">一键同步专家</el-button>
 			</div>
 		</template>
 
@@ -131,6 +132,12 @@
 					getDynamicsList()
 				})
 			}
+			
+			const handleSynExpert = () => {
+				axios.put('/api/back/technicalOfficeDoctors/synExpert').then(() => {
+					ElMessage.success('同步成功')
+				})
+			}
 
 			return {
 				...toRefs(state),
@@ -139,6 +146,7 @@
 				handleAdd,
 				handleEdit,
 				handleStatus,
+				handleSynExpert,
 				Plus,
 			}
 		}
