@@ -2,7 +2,7 @@
   <div class="footer">
     <div class="left">版权所有：@宜宾市第三人民医院</div>
     <div class="right">
-		<el-button type="text">宜宾市第三人民医院官网后台管理系统</el-button>
+		<el-button text>宜宾市第三人民医院官网后台管理系统</el-button>
     </div>
   </div>
 </template>
