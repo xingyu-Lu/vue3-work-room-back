@@ -73,7 +73,7 @@
 				rules: {
 					office_id: [{
 						required: true,
-						message: '科室必须',
+						message: '部门必须',
 						trigger: ['change'],
 					}],
 					name: [{

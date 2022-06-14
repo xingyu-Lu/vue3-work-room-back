@@ -4,7 +4,7 @@
 			<el-button type="primary" :icon="Plus" @click="handleAdd">新增</el-button>
 			<div>
 				<el-select v-model="type" placeholder="Select" filterable>
-					<el-option value="0" label="医院新闻"></el-option>
+					<el-option value="0" label="新闻动态"></el-option>
 					<!-- <el-option value="1" label="医院公告"></el-option> -->
 					<!-- <el-option value="2" label="视频新闻"></el-option> -->
 				</el-select>

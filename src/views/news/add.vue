@@ -3,7 +3,7 @@
 		<el-form :model="Form" :rules="rules" ref="Ref" label-width="100px">
 			<el-form-item label="类型" prop="type">
 				<el-select v-model="Form.type" placeholder="Select">
-					<el-option label="医院新闻" value="0"></el-option>
+					<el-option label="新闻动态" value="0"></el-option>
 					<!-- <el-option label="医院公告" value="1"></el-option> -->
 					<!-- <el-option label="视频新闻" value="2"></el-option> -->
 				</el-select>
