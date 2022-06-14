@@ -4,8 +4,8 @@
 			<el-form-item label="类型" prop="type">
 				<el-select v-model="Form.type" placeholder="Select">
 					<el-option label="医院新闻" value="0"></el-option>
-					<el-option label="医院公告" value="1"></el-option>
-					<el-option label="视频新闻" value="2"></el-option>
+					<!-- <el-option label="医院公告" value="1"></el-option> -->
+					<!-- <el-option label="视频新闻" value="2"></el-option> -->
 				</el-select>
 			</el-form-item>
 			<el-form-item label="封面图" prop="img">

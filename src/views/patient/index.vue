@@ -4,16 +4,16 @@
 			<el-button type="primary" :icon="Plus" @click="handleAdd">新增</el-button>
 			<div>
 				<el-select v-model="type" placeholder="Select" filterable>
-					<el-option value="0" label="门诊流程"></el-option>
-					<el-option value="1" label="住院流程"></el-option>
-					<el-option value="2" label="检查须知"></el-option>
-					<el-option value="3" label="健康体检"></el-option>
-					<el-option value="4" label="医保指南"></el-option>
-					<el-option value="5" label="艾滋病预防"></el-option>
+					<el-option value="0" label="挂号方式"></el-option>
+					<el-option value="1" label="住院方式"></el-option>
+					<!-- <el-option value="2" label="检查须知"></el-option> -->
+					<!-- <el-option value="3" label="健康体检"></el-option> -->
+					<!-- <el-option value="4" label="医保指南"></el-option> -->
+					<!-- <el-option value="5" label="艾滋病预防"></el-option> -->
 					<el-option value="6" label="楼宇分布"></el-option>
 					<el-option value="7" label="联系我们"></el-option>
-					<el-option value="8" label="护理园地"></el-option>
-					<el-option value="9" label="健康促进"></el-option>
+					<!-- <el-option value="8" label="护理园地"></el-option> -->
+					<el-option value="9" label="健康科普"></el-option>
 				</el-select>
 				<el-input style="width: 200px; margin-top: 20px; margin-right: 10px; margin-left: 10px;" placeholder="请输入标题" v-model="title" clearable />
 				<el-button type="primary" @click="handleOption">搜索</el-button>
@@ -28,16 +28,16 @@
 			<el-table-column prop="num" label="浏览次数" />
 			<el-table-column prop="type" label="类型">
 				<template #default="scope">
-					<span v-if="scope.row.type == 0">门诊流程</span>
-					<span v-if="scope.row.type == 1">住院流程</span>
-					<span v-if="scope.row.type == 2">检查须知</span>
-					<span v-if="scope.row.type == 3">健康体检</span>
-					<span v-if="scope.row.type == 4">医保指南</span>
-					<span v-if="scope.row.type == 5">艾滋病预防</span>
+					<span v-if="scope.row.type == 0">挂号方式</span>
+					<span v-if="scope.row.type == 1">住院方式</span>
+					<!-- <span v-if="scope.row.type == 2">检查须知</span> -->
+					<!-- <span v-if="scope.row.type == 3">健康体检</span> -->
+					<!-- <span v-if="scope.row.type == 4">医保指南</span> -->
+					<!-- <span v-if="scope.row.type == 5">艾滋病预防</span> -->
 					<span v-if="scope.row.type == 6">楼宇分布</span>
 					<span v-if="scope.row.type == 7">联系我们</span>
-					<span v-if="scope.row.type == 8">护理园地</span>
-					<span v-if="scope.row.type == 9">健康促进</span>
+					<!-- <span v-if="scope.row.type == 8">护理园地</span> -->
+					<span v-if="scope.row.type == 9">健康科普</span>
 				</template>
 			</el-table-column>
 			<el-table-column prop="status" label="状态">

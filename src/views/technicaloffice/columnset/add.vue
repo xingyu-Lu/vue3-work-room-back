@@ -1,7 +1,7 @@
 <template>
 	<el-card style="min-height: 100%;">
 		<el-form :model="Form" :rules="rules" ref="Ref" label-width="100px">
-			<el-form-item label="科室" prop="office_id">
+			<el-form-item label="部门" prop="office_id">
 				<el-select v-model="Form.office_id" placeholder="Select" filterable>
 					<el-option v-for="item in Form.list" :key="item.id" :label="item.name" :value="item.id">
 					</el-option>

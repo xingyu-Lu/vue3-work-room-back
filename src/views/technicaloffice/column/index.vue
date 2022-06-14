@@ -3,7 +3,7 @@
 		<template #header>
 			<el-button type="primary" :icon="Plus" @click="handleAdd">新增</el-button>
 			<div>
-				<el-input style="width: 200px; margin-top: 20px; margin-right: 10px;" placeholder="请输入科室名称" v-model="office_name" clearable />
+				<el-input style="width: 200px; margin-top: 20px; margin-right: 10px;" placeholder="请输入部门名称" v-model="office_name" clearable />
 				<el-input style="width: 200px; margin-top: 20px; margin-right: 10px;" placeholder="请输入栏目名称" v-model="column_name" clearable />
 				<el-input style="width: 200px; margin-top: 20px; margin-right: 10px;" placeholder="请输入标题" v-model="title" clearable />
 				<el-button type="primary" @click="handleOption">搜索</el-button>
@@ -14,7 +14,7 @@
 		<el-table v-loading="loading" :data="tableData" stripe style="width: 100%" @selection-change="handleSelectionChange">
 			<el-table-column type="selection" />
 			<el-table-column prop="id" label="id" />
-			<el-table-column prop="office_name" label="科室名称" />
+			<el-table-column prop="office_name" label="部门名称" />
 			<el-table-column prop="column_name" label="栏目名称" />
 			<el-table-column prop="column_type_name" label="栏目类型" />
 			<el-table-column prop="title" label="标题" />

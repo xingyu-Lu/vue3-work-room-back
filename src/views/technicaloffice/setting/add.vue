@@ -1,28 +1,28 @@
 <template>
 	<el-card style="min-height: 100%;">
 		<el-form :model="Form" :rules="rules" ref="Ref" label-width="100px">
-			<el-form-item label="科室名称" prop="name">
-				<el-input v-model="Form.name" placeholder="请输入科室名称"></el-input>
+			<el-form-item label="部门名称" prop="name">
+				<el-input v-model="Form.name" placeholder="请输入部门名称"></el-input>
 			</el-form-item>
-			<el-form-item label="科室地址" prop="address">
-				<el-input v-model="Form.address" placeholder="请输入科室地址"></el-input>
+			<el-form-item label="部门地址" prop="address">
+				<el-input v-model="Form.address" placeholder="请输入部门地址"></el-input>
 			</el-form-item>
-			<el-form-item label="科室电话" prop="phone">
-				<el-input v-model="Form.phone" placeholder="请输入科室电话"></el-input>
+			<el-form-item label="部门电话" prop="phone">
+				<el-input v-model="Form.phone" placeholder="请输入部门电话"></el-input>
 			</el-form-item>
-			<el-form-item label="科室索引" prop="index">
-				<el-input v-model="Form.index" placeholder="请输入科室索引"></el-input>
+			<el-form-item label="部门索引" prop="index">
+				<el-input v-model="Form.index" placeholder="请输入部门索引"></el-input>
 			</el-form-item>
 			<el-form-item label="排序" prop="sort">
 				<el-input v-model="Form.sort" placeholder="请输入排序" type="number" min="0"></el-input>
 			</el-form-item>
-			<el-form-item label="类型" prop="type">
+			<!-- <el-form-item label="类型" prop="type">
 				<el-radio-group v-model="Form.type">
 					<el-radio label=0>临床部门</el-radio>
 					<el-radio label=1>医技部门</el-radio>
 					<el-radio label=2>保障部门</el-radio>
 				</el-radio-group>
-			</el-form-item>
+			</el-form-item> -->
 			<el-form-item label="状态" prop="status">
 				<el-radio-group v-model="Form.status" disabled>
 					<el-radio label=1>开启</el-radio>
@@ -78,27 +78,27 @@
 				rules: {
 					name: [{
 						required: true,
-						message: '科室名称必须',
+						message: '部门名称必须',
 						trigger: ['change'],
 					}],
 					address: [{
 						required: false,
-						message: '科室地址必须',
+						message: '部门地址必须',
 						trigger: ['change'],
 					}],
 					phone: [{
 						required: false,
-						message: '科室电话必须',
+						message: '部门电话必须',
 						trigger: ['change'],
 					}],
 					index: [{
 						required: true,
-						message: '科室索引必须',
+						message: '部门索引必须',
 						trigger: ['change'],
 					}],
 					sort: [{
 						required: true,
-						message: '科室排序必须',
+						message: '部门排序必须',
 						trigger: ['change'],
 					}],
 					type: [{
@@ -146,11 +146,11 @@
 						}
 			
 						if (params.name.length > 50) {
-							ElMessage.error('科室名称不能超过50个字符')
+							ElMessage.error('部门名称不能超过50个字符')
 							return
 						}
 						if (params.address.length > 100) {
-							ElMessage.error('科室地址不能超过100个字符')
+							ElMessage.error('部门地址不能超过100个字符')
 							return
 						}
 			

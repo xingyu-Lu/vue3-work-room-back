@@ -3,7 +3,7 @@
 		<template #header>
 			<el-button type="primary" :icon="Plus" @click="handleAdd">新增</el-button>
 			<div>
-				<el-input style="width: 200px; margin-top: 20px; margin-right: 10px;" placeholder="请输入科室名称" v-model="office_name" clearable />
+				<el-input style="width: 200px; margin-top: 20px; margin-right: 10px;" placeholder="请输入部门名称" v-model="office_name" clearable />
 				<el-button type="primary" @click="handleOption">搜索</el-button>
 				<el-button type="primary" @click="handleSynExpert">一键同步专家</el-button>
 			</div>
@@ -11,7 +11,7 @@
 
 		<el-table v-loading="loading" :data="tableData" stripe style="width: 100%">
 			<el-table-column prop="id" label="id" />
-			<el-table-column prop="office_name" label="科室名称" />
+			<el-table-column prop="office_name" label="部门名称" />
 			<el-table-column prop="name" label="医生名字" />
 			<el-table-column label="图片">
 				<template #default="scope">

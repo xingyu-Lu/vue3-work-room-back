@@ -7,16 +7,16 @@
 		<el-form :model="Form" :rules="rules" ref="Ref" label-width="100px">
 			<el-form-item label="类型" prop="type">
 				<el-select v-model="Form.type" placeholder="Select" filterable>
-					<el-option value="0" label="门诊流程"></el-option>
-					<el-option value="1" label="住院流程"></el-option>
-					<el-option value="2" label="检查须知"></el-option>
-					<el-option value="3" label="健康体检"></el-option>
-					<el-option value="4" label="医保指南"></el-option>
-					<el-option value="5" label="艾滋病预防"></el-option>
+					<el-option value="0" label="挂号方式"></el-option>
+					<el-option value="1" label="住院方式"></el-option>
+					<!-- <el-option value="2" label="检查须知"></el-option> -->
+					<!-- <el-option value="3" label="健康体检"></el-option> -->
+					<!-- <el-option value="4" label="医保指南"></el-option> -->
+					<!-- <el-option value="5" label="艾滋病预防"></el-option> -->
 					<el-option value="6" label="楼宇分布"></el-option>
 					<el-option value="7" label="联系我们"></el-option>
-					<el-option value="8" label="护理园地"></el-option>
-					<el-option value="9" label="健康促进"></el-option>
+					<!-- <el-option value="8" label="护理园地"></el-option> -->
+					<el-option value="9" label="健康科普"></el-option>
 				</el-select>
 			</el-form-item>
 			<!-- <el-form-item label="封面图" prop="img">
