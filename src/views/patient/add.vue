@@ -1,7 +1,7 @@
 <template>
 	<el-card style="min-height: 100%;">
 		<el-descriptions title="提示">
-		    <el-descriptions-item>门诊流程、住院流程、艾滋病预防、楼宇分布、联系我们只可新增一次</el-descriptions-item>
+		    <el-descriptions-item>挂号方式、住院方式、楼宇分布、联系我们只可新增一次</el-descriptions-item>
 		</el-descriptions>
 		<el-divider></el-divider>
 		<el-form :model="Form" :rules="rules" ref="Ref" label-width="100px">
