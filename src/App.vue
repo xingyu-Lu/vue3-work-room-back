@@ -6,7 +6,7 @@
 					<div class="head">
 						<div>
 							<!-- <img src="/src/assets/hospital_logo.jpg" alt="logo"> -->
-							<a href="/" style="color: white; font-size: 18px;">名医工作室</a>
+							<a href="/" style="color: white; font-size: 18px;">三江名医工作室</a>
 						</div>
 					</div>
 					<div class="line" />
