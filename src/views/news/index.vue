@@ -27,7 +27,7 @@
 			</el-table-column>
 			<el-table-column prop="type" label="类型">
 				<template #default="scope">
-					<span v-if="scope.row.type == 0">医院新闻</span>
+					<span v-if="scope.row.type == 0">工作室新闻</span>
 					<span v-if="scope.row.type == 1">医院公告</span>
 					<span v-if="scope.row.type == 2">视频新闻</span>
 				</template>
