@@ -6,6 +6,6 @@ export default {
     baseUrl: 'http://120.25.160.244:7004' // 正式接口域名
   },
   production: {
-    baseUrl: 'http://120.25.160.244:7004' // 正式接口域名
+    baseUrl: '//api.sjmy.666120.cn' // 正式接口域名
   }
 }
