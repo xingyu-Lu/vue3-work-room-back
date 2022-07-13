@@ -11,17 +11,17 @@
 			<li>菜单管理</li>
 			<li>角色管理</li>
 			<li>权限管理(rbac)</li>
-			<li>医院概况</li>
+			<li>工作室概况</li>
 			<li>新闻动态</li>
-			<li>科室介绍</li>
+			<li>部门设置</li>
 			<li>专家介绍</li>
-			<li>科研教学</li>
+			<!-- <li>科研教学</li> -->
 			<li>患者服务</li>
-			<li>党建</li>
-			<li>人才招聘</li>
+			<!-- <li>党建</li> -->
+			<!-- <li>人才招聘</li> -->
 			<li>员工管理</li>
-			<li>院内员工发文</li>
-			<li>文件云盘</li>
+			<!-- <li>院内员工发文</li> -->
+			<!-- <li>文件云盘</li> -->
 		</ul>
 		<h1>技术选型</h1>
 		<ul style="font-weight: bold; line-height: 32px;">

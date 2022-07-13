@@ -33,16 +33,22 @@
 					</template>
 				</el-upload>
 			</el-form-item>
-			<el-form-item label="附件" prop='attachment'>
+			<!-- <el-form-item label="附件" prop='attachment'>
 				<el-upload ref="attachmentRef" :headers="{ Authorization: token }" :action="uploadImgServer" :on-remove="handleAttachmentRemove" :on-success="handleAttachmentSuccess" :auto-upload="true" :data="{ basket: 'attachment' }" :limit="3" multiple :file-list="Form.attachmentFileList">
 					<el-button type="primary">上传</el-button>
 				</el-upload>
-			</el-form-item>
+			</el-form-item> -->
 			<el-form-item label="标题" prop="title">
 				<el-input v-model="Form.title" placeholder="请输入标题" type="text"></el-input>
 			</el-form-item>
 			<el-form-item label="内容" prop="content">
-				<div ref='editor' style="z-index: 1;"></div>
+				<div style="border: 1px solid #ccc; z-index: 100">
+					<Toolbar style="border-bottom: 1px solid #ccc" :editor="editorRef" :defaultConfig="toolbarConfig"
+						:mode="mode" />
+					<Editor style="height: 500px; overflow-y: hidden;" v-model="Form.content"
+						:defaultConfig="editorConfig" :mode="mode" @onCreated="handleCreated" />
+				</div>
+				<!-- <div ref='editor' style="z-index: 1;"></div> -->
 			</el-form-item>
 			<el-form-item label="发布时间" prop="release_time">
 				<el-date-picker v-model="Form.release_time" type="datetime" :default-value="new Date()"
@@ -72,9 +78,35 @@
 		ref,
 		toRefs,
 		onMounted,
-		onBeforeUnmount
+		onBeforeUnmount,
+		shallowRef,
 	} from 'vue'
-	import WangEditor from 'wangeditor'
+	
+	// editor
+	import '@wangeditor/editor/dist/css/style.css'
+	import attachmentModule from '@wangeditor/plugin-upload-attachment'
+	import {
+		Editor,
+		Toolbar
+	} from '@wangeditor/editor-for-vue'
+	import {
+		Boot
+	} from '@wangeditor/editor'
+	// 生成 html 的函数
+	function attachmentToHtml(elem, childrenHtml) {
+	  const { link = '', fileName = '' } = elem
+	  // return `<span data-w-e-type="attachment" data-w-e-is-void data-w-e-is-inline data-link="${link}" data-fileName="${fileName}">${fileName}</span>`
+	  return `<a data-w-e-type="attachment" data-w-e-is-void data-w-e-is-inline data-link="${link}" data-fileName="${fileName}" href="${link}" target="_blank">${fileName}</a>`
+	}
+	// 配置
+	const conf = {
+	  type: 'attachment', // 节点 type ，重要！！！
+	  elemToHtml: attachmentToHtml,
+	}
+	attachmentModule.elemsToHtml = [conf]
+	// 注册。要在创建编辑器之前注册，且只能注册一次，不可重复注册。
+	Boot.registerModule(attachmentModule)
+	
 	import axios from '@/utils/axios'
 	import {
 		ElMessage
@@ -93,12 +125,13 @@
 		name: 'news_add',
 		components: {
 			Plus,
-			Delete
+			Delete,
+			Editor,
+			Toolbar
 		},
 		setup() {
 			const attachmentRef = ref(null)
 			const Ref = ref(null)
-			const editor = ref(null)
 			const uploadRef = ref(null)
 			const route = useRoute()
 			const router = useRouter()
@@ -150,70 +183,114 @@
 					}],
 				},
 			})
-
-			let instance
-			onMounted(() => {
-				instance = new WangEditor(editor.value)
-				instance.config.lineHeights = ['1', '1.15', '1.5', '2', '2.5', '3']
-				instance.config.showLinkImg = false
-				instance.config.showLinkImgAlt = false
-				instance.config.showLinkImgHref = false
-				instance.config.uploadImgMaxSize = 2 * 1024 * 1024 // 5M
-				instance.config.uploadImgMaxLength = 1
-				instance.config.uploadImgAccept = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp']
-				instance.config.uploadFileName = 'file'
-				instance.config.uploadImgHeaders = {
-					Authorization: state.token
-				}
-				instance.config.uploadImgParams = {
-					basket: 'img'
-				}
-				// 图片返回格式不同，需要自定义返回格式
-				instance.config.uploadImgHooks = {
-					// 图片上传并返回了结果，想要自己把图片插入到编辑器中
-					// 例如服务器端返回的不是 { errno: 0, data: [...] } 这种格式，可使用 customInsert
-					customInsert: function(insertImgFn, result) {
-						console.log('result', result)
-						// result 即服务端返回的接口
-						// insertImgFn 可把图片插入到编辑器，传入图片 src ，执行函数即可
-						insertImgFn(result.data.src)
-						// if (result.data && result.data.length) {
-						// 	result.data.forEach(item => insertImgFn(item))
-						// }
-					}
-				}
-				instance.config.uploadImgServer = uploadImgsServer
-				Object.assign(instance.config, {
-					onchange() {
-						console.log('change')
+			
+			const editorRef = shallowRef()
+			const toolbarConfig = {
+				// 插入哪些菜单
+				insertKeys: {
+					index: 31, // 自定义插入的位置
+					keys: ['uploadAttachment'], // “上传附件”菜单
+				},
+			}
+			const editorConfig = {
+				placeholder: '请输入内容...',
+				hoverbarKeys: {
+					attachment: {
+						menuKeys: ['downloadAttachment'], // “下载附件”菜单
 					},
-				})
-
-				instance.config.uploadVideoServer = uploadImgsServer
-				instance.config.uploadVideoMaxSize = 1 * 200 * 1024 * 1024 // 1024m
-				instance.config.uploadVideoAccept = ['mp4']
-				instance.config.uploadVideoParams = {
-					basket: 'video',
-				}
-				instance.config.uploadVideoName = 'file'
-				instance.config.uploadVideoHeaders = {
-					Authorization: state.token
-				}
-
-				instance.config.uploadVideoHooks = {
-					// 视频上传并返回了结果，想要自己把视频插入到编辑器中
-					// 例如服务器端返回的不是 { errno: 0, data: { url : '.....'} } 这种格式，可使用 customInsert
-					customInsert: function(insertVideoFn, result) {
-						// result 即服务端返回的接口
-						console.log('customInsert', result)
-
-						// insertVideoFn 可把视频插入到编辑器，传入视频 src ，执行函数即可
-						insertVideoFn(result.data.src)
+				},
+				MENU_CONF: {
+					uploadImage: {
+						server: uploadImgsServer,
+						fieldName: 'file',
+						// 单个文件的最大体积限制，默认为 2M
+						maxFileSize: 2 * 1024 * 1024, // 2M
+						// 最多可上传几个文件，默认为 100
+						maxNumberOfFiles: 10,
+						// 选择文件时的类型限制，默认为 ['image/*'] 。如不想限制，则设置为 []
+						allowedFileTypes: ['image/*'],
+						// 自定义上传参数，例如传递验证的 token 等。参数会被添加到 formData 中，一起上传到服务端。
+						meta: {
+							basket: 'img',
+						},
+						headers: {
+							Authorization: state.token
+						},
+						customInsert: function(res, insertFn) {
+							// res 即服务端返回的接口
+							// insertImgFn 可把图片插入到编辑器，传入图片 src ，执行函数即可
+							insertFn(res.data.src, res.data.file_name, res.data.src)
+							// if (res.data && res.data.length) {
+							// 	res.data.forEach(item => insertImgFn(item))
+							// }
+						},
+						// 上传错误，或者触发 timeout 超时
+						onError(file, err, res) {
+							ElMessage.error((new Error(err)).message)
+							console.log(file, err, res)
+						},
+					},
+					uploadVideo: {
+						server: uploadImgsServer,
+						fieldName: 'file',
+						// 单个文件的最大体积限制，默认为 10M
+						maxFileSize: 100 * 1024 * 1024, // 100M
+						// 选择文件时的类型限制，默认为 ['video/*'] 。如不想限制，则设置为 []
+						allowedFileTypes: ['video/*'],
+						// 自定义上传参数，例如传递验证的 token 等。参数会被添加到 formData 中，一起上传到服务端。
+						meta: {
+							basket: 'video',
+						},
+						headers: {
+							Authorization: state.token
+						},
+						customInsert: function(res, insertFn) {
+							// res 即服务端返回的接口
+							// insertImgFn 可把图片插入到编辑器，传入图片 src ，执行函数即可
+							insertFn(res.data.src)
+							// if (res.data && res.data.length) {
+							// 	res.data.forEach(item => insertImgFn(item))
+							// }
+						},
+						// 上传错误，或者触发 timeout 超时
+						onError(file, err, res) {
+							ElMessage.error((new Error(err)).message)
+							console.log(file, err, res)
+						},
+					},
+					uploadAttachment: {
+						server: uploadImgsServer, // 服务端地址
+						fieldName: 'file',
+						maxFileSize: 10 * 1024 * 1024, // 10M
+						// 自定义上传参数，例如传递验证的 token 等。参数会被添加到 formData 中，一起上传到服务端。
+						meta: {
+							basket: 'attachment',
+						},
+						headers: {
+							Authorization: state.token
+						},
+						customInsert: function(res, file, insertFn) {
+							// res 即服务端返回的接口
+							// 插入附件到编辑器
+							insertFn(`${file.name}`, res.data.src)
+							// if (res.data && res.data.length) {
+							// 	res.data.forEach(item => insertImgFn(item))
+							// }
+						},
+						// 上传错误，或者触发 timeout 超时
+						onError(file, err, res) {
+							ElMessage.error((new Error(err)).message)
+							console.log(file, err, res)
+						},
 					}
 				}
+			}
+			
+			const handleCreated = (editor) => {
+				editorRef.value = editor // 记录 editor 实例，重要！
+			}
 
-				instance.create()
-
+			onMounted(() => {
 				if (id) {
 					axios.get(`/api/back/news/${id}`).then(res => {
 						state.Form = {
@@ -223,23 +300,20 @@
 							img: res.data.file_id,
 							type: String(res.data.type),
 							title: res.data.title,
+							content: res.data.content,
 							release_time: res.data.release_time,
 							status: String(res.data.status),
 							fileList: [{url: res.data.url}],
 							disabled: true
-						}
-
-						if (instance) {
-							// 初始化商品详情 html
-							instance.txt.html(res.data.content)
 						}
 					})
 				}
 			})
 
 			onBeforeUnmount(() => {
-				instance.destroy()
-				instance = null
+				const editor = editorRef.value
+				if (editor == null) return
+				editor.destroy()
 			})
 
 			const submitAdd = () => {
@@ -252,7 +326,7 @@
 							img: state.Form.img,
 							type: state.Form.type,
 							title: state.Form.title,
-							content: instance.txt.html(),
+							content: state.Form.content,
 							release_time: state.Form.release_time,
 							status: state.Form.status,
 						}
@@ -332,7 +406,11 @@
 
 			return {
 				...toRefs(state),
-				editor,
+				editorRef,
+				mode: 'default',
+				toolbarConfig,
+				editorConfig,
+				handleCreated,
 				attachmentRef,
 				uploadRef,
 				Ref,

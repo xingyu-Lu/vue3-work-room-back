@@ -8,6 +8,9 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "@wangeditor/editor": "^5.1.6",
+    "@wangeditor/editor-for-vue": "^5.1.12",
+    "@wangeditor/plugin-upload-attachment": "^1.0.0",
     "axios": "^0.21.1",
     "element-plus": "^2.2.9",
     "js-md5": "^0.7.3",
