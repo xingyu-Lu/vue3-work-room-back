@@ -132,4 +132,7 @@
 	:deep() input[type="checkbox"] {
 	  margin-right: 5px;
 	}
+	:deep() div[data-w-e-type="video"] {
+		text-align: center;
+	}
 </style>
