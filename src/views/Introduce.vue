@@ -2,7 +2,7 @@
 	<el-card class="account-container" style="display: flex; justify-content: flex-start; align-items: center;">
 		<h1>系统简介</h1>
 		<div style="line-height: 30px">
-			后台管理系统，基于 Laravel 、Vue 3.0 、Element Plus 相关技术栈开发的医院官网后台管理系统。
+			后台管理系统，基于 Laravel 、Vue 3.0 、Element Plus 相关技术栈开发的三江名医工作室后台管理系统。
 		</div>
 		<h1>主要功能</h1>
 		<ul style="font-weight: bold; line-height: 32px;">

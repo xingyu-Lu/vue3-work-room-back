@@ -2,7 +2,7 @@
   <div class="footer">
     <div class="left">版权所有：@三江名医工作室</div>
     <div class="right">
-		<el-button text>名医工作室后台管理系统</el-button>
+		<el-button text>三江名医工作室后台管理系统</el-button>
     </div>
   </div>
 </template>
