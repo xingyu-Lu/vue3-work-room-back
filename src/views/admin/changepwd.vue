@@ -1,5 +1,9 @@
 <template>
 	<el-card style="min-height: 100%;">
+		<el-descriptions title="提示">
+		    <el-descriptions-item label="">密码需包含小写字母, 大写字母, 及数字, 长度6~16位</el-descriptions-item>
+		</el-descriptions>
+		
 		<el-form :model="adminForms" :rules="rules" ref="adminRefs" label-width="100px">
 			<el-form-item label="原密码" prop="old_password">
 				<el-input v-model="adminForms.old_password" placeholder="请输入原密码"></el-input>
